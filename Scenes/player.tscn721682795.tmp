@@ -6,12 +6,12 @@
 [ext_resource type="PackedScene" uid="uid://dqphrfobu0tf6" path="res://Scenes/Componets/health_componet.tscn" id="4_fkybt"]
 [ext_resource type="PackedScene" uid="uid://bvyhlnhreopdw" path="res://Scenes/pistol.tscn" id="5_fkybt"]
 [ext_resource type="Texture2D" uid="uid://dds0alum3pwcx" path="res://Assets/Health bar-1.png.png" id="6_x3wgy"]
-[ext_resource type="Script" uid="uid://6bmuw7drnpuc" path="res://Scenes/Scripts/State_machine/state_machine.gd" id="7_3smsa"]
-[ext_resource type="Script" uid="uid://dt80swajhbh10" path="res://Scenes/Scripts/State_machine/idle.gd" id="8_8erm5"]
-[ext_resource type="Script" uid="uid://drnjfiut87vhp" path="res://Scenes/Scripts/State_machine/jump.gd" id="9_gymyn"]
-[ext_resource type="Script" uid="uid://dybi5168rawy4" path="res://Scenes/Scripts/State_machine/fall.gd" id="10_pu2lt"]
-[ext_resource type="Script" uid="uid://cnm3gxnaiwubb" path="res://Scenes/Scripts/State_machine/move.gd" id="11_ukyrk"]
-[ext_resource type="Script" uid="uid://cl27hfoaulft5" path="res://Scenes/Scripts/State_machine/double_jump.gd" id="12_pu2lt"]
+[ext_resource type="Script" uid="uid://6bmuw7drnpuc" path="res://Scenes/Scripts/state_machine.gd" id="7_3smsa"]
+[ext_resource type="Script" uid="uid://dt80swajhbh10" path="res://Scenes/idle.gd" id="8_8erm5"]
+[ext_resource type="Script" uid="uid://drnjfiut87vhp" path="res://Scenes/Scripts/jump.gd" id="9_gymyn"]
+[ext_resource type="Script" uid="uid://dybi5168rawy4" path="res://Scenes/Scripts/fall.gd" id="10_pu2lt"]
+[ext_resource type="Script" uid="uid://cnm3gxnaiwubb" path="res://Scenes/Scripts/move.gd" id="11_ukyrk"]
+[ext_resource type="Script" uid="uid://cl27hfoaulft5" path="res://Scenes/Scripts/double_jump.gd" id="12_pu2lt"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_cvnsp"]
 radius = 26.0
@@ -25,37 +25,6 @@ height = 86.0
 texture_filter = 1
 collision_mask = 2
 script = ExtResource("1_cvnsp")
-
-[node name="State_machine" type="Node" parent="." node_paths=PackedStringArray("starting_state")]
-script = ExtResource("7_3smsa")
-starting_state = NodePath("Idle")
-
-[node name="Idle" type="Node" parent="State_machine" node_paths=PackedStringArray("fall_state", "move_state", "jump_state")]
-script = ExtResource("8_8erm5")
-fall_state = NodePath("../Fall")
-move_state = NodePath("../Move")
-jump_state = NodePath("../Jump")
-
-[node name="Jump" type="Node" parent="State_machine" node_paths=PackedStringArray("fall_state", "double_jump_state")]
-script = ExtResource("9_gymyn")
-fall_state = NodePath("../Fall")
-double_jump_state = NodePath("../Double_jump")
-
-[node name="Fall" type="Node" parent="State_machine" node_paths=PackedStringArray("move_state", "idle_state", "double_jump_state")]
-script = ExtResource("10_pu2lt")
-move_state = NodePath("../Move")
-idle_state = NodePath("../Idle")
-double_jump_state = NodePath("../Double_jump")
-
-[node name="Move" type="Node" parent="State_machine" node_paths=PackedStringArray("fall_state", "idle_state", "jump_state")]
-script = ExtResource("11_ukyrk")
-fall_state = NodePath("../Fall")
-idle_state = NodePath("../Idle")
-jump_state = NodePath("../Jump")
-
-[node name="Double_jump" type="Node" parent="State_machine" node_paths=PackedStringArray("fall_state")]
-script = ExtResource("12_pu2lt")
-fall_state = NodePath("../Fall")
 
 [node name="Sprite" parent="." instance=ExtResource("1_v0iea")]
 
@@ -94,5 +63,36 @@ texture_progress = ExtResource("6_x3wgy")
 
 [node name="Smoke_point" type="Marker2D" parent="."]
 position = Vector2(0, 22)
+
+[node name="State_machine" type="Node" parent="." node_paths=PackedStringArray("starting_state")]
+script = ExtResource("7_3smsa")
+starting_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="State_machine" node_paths=PackedStringArray("fall_state", "move_state", "jump_state")]
+script = ExtResource("8_8erm5")
+fall_state = NodePath("../Fall")
+move_state = NodePath("../Move")
+jump_state = NodePath("../Jump")
+
+[node name="Jump" type="Node" parent="State_machine" node_paths=PackedStringArray("fall_state", "double_jump_state")]
+script = ExtResource("9_gymyn")
+fall_state = NodePath("../Fall")
+double_jump_state = NodePath("../Double_jump")
+
+[node name="Fall" type="Node" parent="State_machine" node_paths=PackedStringArray("move_state", "idle_state", "double_jump_state")]
+script = ExtResource("10_pu2lt")
+move_state = NodePath("../Move")
+idle_state = NodePath("../Idle")
+double_jump_state = NodePath("../Double_jump")
+
+[node name="Move" type="Node" parent="State_machine" node_paths=PackedStringArray("fall_state", "idle_state", "jump_state")]
+script = ExtResource("11_ukyrk")
+fall_state = NodePath("../Fall")
+idle_state = NodePath("../Idle")
+jump_state = NodePath("../Jump")
+
+[node name="Double_jump" type="Node" parent="State_machine" node_paths=PackedStringArray("fall_state")]
+script = ExtResource("12_pu2lt")
+fall_state = NodePath("../Fall")
 
 [connection signal="health_changed" from="HealthComponet" to="." method="_on_health_changed"]

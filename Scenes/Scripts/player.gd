@@ -14,8 +14,6 @@ var move_speed := 700.0
 
 var can_double_jump := true
 
-var double_jumped := false
-
 func _ready() -> void:
 	state_machine.init(self)
 	#Fades out HP bar
@@ -39,6 +37,8 @@ func _process(delta: float) -> void:
 func apply_gravitiy(delta : float):
 	if not is_on_floor():
 		velocity.y += gravity * delta
+	else:
+		can_double_jump = true
 
 func handle_animations():
 	if is_on_floor():
@@ -47,7 +47,7 @@ func handle_animations():
 		else:
 			sprite.play("idle")
 	else:
-		if double_jumped:
+		if state_machine.current_state is Double_jump_state:
 			sprite.play("double_jump")
 		else:
 			sprite.play("fall")
@@ -58,6 +58,11 @@ func handle_animations():
 	elif velocity.x < 0:
 		sprite.scale.x = -1
 		
+func add_smoke():
+	var smoke = JUMP_SMOKE.instantiate()
+	smoke.position = $Smoke_point.global_position
+	get_tree().current_scene.add_child(smoke)
+	smoke.play()
 
 func _on_health_changed(currenthp: float, maxhp: float) -> void:
 	
