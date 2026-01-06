@@ -10,4 +10,9 @@ func enter() -> void:
 func process_physics(delta: float) -> State:
 	var movement := Input.get_axis("Left","Right") * move_speed
 	parent.velocity.x = movement
+	if parent.is_on_floor():
+		if movement != 0:
+			return move_state
+		else:
+			return idle_state
 	return null

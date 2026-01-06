@@ -28,70 +28,17 @@ func _physics_process(delta: float) -> void:
 	state_machine.process_physics(delta)
 	apply_gravitiy(delta)
 	move_and_slide()
+	handle_animations()
 	
 func _input(event: InputEvent) -> void:
 	state_machine.process_input(event)
 	
 func _process(delta: float) -> void:
 	state_machine.process_frame(delta)
-#
-##func idle_state():
-#	velocity.x = move_toward(velocity.x, 0, SPEED / 9)
-#	
-#	var direction := Input.get_axis("Left", "Right")
-#	if direction:
-#		state = State.RUN
-#	if Input.is_action_just_pressed("Jump"):
-#		state = State.JUMP
-#	elif not is_on_floor():
-#		state = State.FALL
-##
-##func run_state():
-#	
-#	var direction := Input.get_axis("Left", "Right")
-#	if direction:
-#		velocity.x = direction * SPEED
-#	else:
-#		state = State.IDLE
-#		
-#	if Input.is_action_just_pressed("Jump"):
-#		state = State.JUMP
-#	elif not is_on_floor():
-#		state = State.FALL
-##	
-##func jump_state():
-#	velocity.y = JUMP_VELOCITY
-#	state = State.FALL
-##
-##func fall_state():
-#	var direction := Input.get_axis("Left", "Right")
-#	velocity.x = direction * SPEED
-#	
-#	if Input.is_action_just_pressed("Jump") and not is_on_floor() and can_double_jump:
-#		state = State.DOUBLE_JUMP
-#	
-#	if is_on_floor():
-#		if direction:
-#			state = State.RUN
-#		else:
-#			state = State.IDLE
-##
-##func double_jump_state():
-#	var smoke = JUMP_SMOKE.instantiate()
-#	smoke.position = $Smoke_point.global_position
-#	get_tree().current_scene.add_child(smoke)
-#	smoke.play()
-#	can_double_jump = false
-#	double_jumped = true
-#	velocity.y = JUMP_VELOCITY
-#	state = State.FALL
 
 func apply_gravitiy(delta : float):
 	if not is_on_floor():
 		velocity.y += gravity * delta
-	else:
-		can_double_jump = true
-		double_jumped = false
 
 func handle_animations():
 	if is_on_floor():

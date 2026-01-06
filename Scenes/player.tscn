@@ -77,10 +77,15 @@ jump_state = NodePath("../Jump")
 script = ExtResource("9_gymyn")
 fall_state = NodePath("../Fall")
 
-[node name="Fall" type="Node" parent="State_machine"]
+[node name="Fall" type="Node" parent="State_machine" node_paths=PackedStringArray("move_state", "idle_state")]
 script = ExtResource("10_pu2lt")
+move_state = NodePath("../Move")
+idle_state = NodePath("../Idle")
 
-[node name="Move" type="Node" parent="State_machine"]
+[node name="Move" type="Node" parent="State_machine" node_paths=PackedStringArray("fall_state", "idle_state", "jump_state")]
 script = ExtResource("11_ukyrk")
+fall_state = NodePath("../Fall")
+idle_state = NodePath("../Idle")
+jump_state = NodePath("../Jump")
 
 [connection signal="health_changed" from="HealthComponet" to="." method="_on_health_changed"]
