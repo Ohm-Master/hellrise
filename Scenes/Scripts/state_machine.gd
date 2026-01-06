@@ -8,7 +8,7 @@ func init(parent : Player):
 	for child in get_children():
 		child.parent = parent
 		
-		
+
 func change_state(new_state : State):
 	if current_state:
 		current_state.exit()

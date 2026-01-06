@@ -6,9 +6,9 @@ const JUMP_SMOKE = preload("uid://ehwk1mq7udbc")
 
 @onready var state_machine: Node = $State_machine
 
-const SPEED = 700.0
-const JUMP_VELOCITY = -750.0
-const GRAVITY := 1500.0
+var gravity := 1500.0
+var jump_force := -750.0
+var move_speed := 700.0
 
 @onready var sprite: Node2D = $Sprite
 
@@ -26,6 +26,7 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	state_machine.process_physics(delta)
+	apply_gravitiy(delta)
 	move_and_slide()
 	
 func _input(event: InputEvent) -> void:
@@ -87,7 +88,7 @@ func _process(delta: float) -> void:
 
 func apply_gravitiy(delta : float):
 	if not is_on_floor():
-		velocity.y += GRAVITY * delta
+		velocity.y += gravity * delta
 	else:
 		can_double_jump = true
 		double_jumped = false

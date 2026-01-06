@@ -73,8 +73,9 @@ fall_state = NodePath("../Fall")
 move_state = NodePath("../Move")
 jump_state = NodePath("../Jump")
 
-[node name="Jump" type="Node" parent="State_machine"]
+[node name="Jump" type="Node" parent="State_machine" node_paths=PackedStringArray("fall_state")]
 script = ExtResource("9_gymyn")
+fall_state = NodePath("../Fall")
 
 [node name="Fall" type="Node" parent="State_machine"]
 script = ExtResource("10_pu2lt")

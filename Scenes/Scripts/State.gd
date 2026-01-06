@@ -2,10 +2,11 @@ extends Node
 
 class_name State
 
-@export var move_speed : float = 700.0 
-@export var gravity : float = 1500.0
+var parent : Player
 
-var parent = Player
+var move_speed : float = parent.move_speed
+var gravity : float = parent.gravity
+var jump_force : = parent.jump_force
 
 func enter() -> void:
 	pass

@@ -11,7 +11,6 @@ script = ExtResource("1_ui64p")
 [node name="Pistol" type="Sprite2D" parent="Pivot_point"]
 position = Vector2(196, 0)
 texture = ExtResource("1_v21tj")
-flip_v = true
 
 [node name="Shoot_point" type="Marker2D" parent="Pivot_point/Pistol"]
 position = Vector2(52, 8)
