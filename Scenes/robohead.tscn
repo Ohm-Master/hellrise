@@ -40,10 +40,10 @@ debug_color = Color(1, 1, 0, 0.09803922)
 
 [node name="Sprite" type="Sprite2D" parent="."]
 rotation = -1.5707964
-scale = Vector2(5, 5)
 texture = ExtResource("2_4acy3")
 
 [node name="HealthComponet" parent="." instance=ExtResource("3_3c42p")]
+rotation = -1.5707964
 max_health = 30.0
 
 [node name="HurtBoxComponet" parent="." node_paths=PackedStringArray("Health") groups=["Damageable"] instance=ExtResource("4_v25xe")]
@@ -63,7 +63,11 @@ shape = SubResource("CapsuleShape2D_blx7o")
 [node name="Shootpoint" type="Marker2D" parent="."]
 position = Vector2(36.666668, 0)
 
+[node name="Idlepoint" type="Marker2D" parent="."]
+position = Vector2(0, 168)
+
 [connection signal="body_entered" from="Chase_zone" to="." method="_on_chase_zone_body_entered"]
 [connection signal="body_exited" from="Chase_zone" to="." method="_on_chase_zone_body_exited"]
 [connection signal="body_entered" from="Shoot_zone" to="." method="_on_shoot_zone_body_entered"]
 [connection signal="body_exited" from="Shoot_zone" to="." method="_on_shoot_zone_body_exited"]
+[connection signal="health_changed" from="HealthComponet" to="." method="_on_health_changed"]

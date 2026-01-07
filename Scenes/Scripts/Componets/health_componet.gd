@@ -9,7 +9,6 @@ var health : float
 
 func _ready() -> void:
 	health = max_health
-	health_changed.emit(health, max_health)
 	
 func take_damage(damage : float):
 	health -= damage

@@ -53,5 +53,5 @@ position_smoothing_enabled = true
 position_smoothing_speed = 7.5
 
 [node name="Robohead" parent="." node_paths=PackedStringArray("player") instance=ExtResource("3_8gbba")]
-position = Vector2(888, -827)
+position = Vector2(1245, -764.00006)
 player = NodePath("../Player")
