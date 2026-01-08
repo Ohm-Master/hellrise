@@ -64,6 +64,9 @@ func add_smoke():
 	get_tree().current_scene.add_child(smoke)
 	smoke.play()
 
+func die():
+	queue_free()
+
 func _on_health_changed(currenthp: float, maxhp: float) -> void:
 	
 	var tween := create_tween()

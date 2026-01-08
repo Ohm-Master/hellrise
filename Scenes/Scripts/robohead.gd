@@ -5,6 +5,7 @@ extends CharacterBody2D
 #Add death anim
 
 const BULLET = preload("uid://d1kqj34jeqaf")
+const EXPLOSION_EFFECT = preload("uid://b24hi0mxc88hi")
 
 @onready var sprite: Sprite2D = $Sprite
 @onready var shoot_point: Marker2D = $Shootpoint
@@ -14,6 +15,7 @@ enum States {
 	IDLE,
 	CHASE,
 	SHOOT, 
+	DIE
 }
 
 var state = States.IDLE
@@ -24,7 +26,7 @@ var damage_taken := false
 
 var move_speed := 600
 var damage := 20.0
-var shoot_cooldown := 1.0
+var shoot_cooldown := 0.5
 var shoot_timer := 1.0
 
 var bob_time := 0.0
@@ -46,6 +48,8 @@ func handle_states(delta : float):
 			chase_state()
 		States.SHOOT:
 			shoot_state(delta)
+		States.DIE:
+			death_state()
 			
 func idle_state(delta : float):
 	velocity = Vector2(0,0)
@@ -54,8 +58,8 @@ func idle_state(delta : float):
 	sprite.position.x = sin(bob_time) * bob_height
 	
 	rotation_degrees = 90
-	#if in_chase_zone or damage_taken:
-	#	state = States.CHASE
+	if in_chase_zone or damage_taken:
+		state = States.CHASE
 	
 func chase_state():
 	look_at(player.global_position)
@@ -82,6 +86,13 @@ func shoot_state(delta : float):
 	if not in_shoot_zone:
 		state = States.SHOOT
 
+func death_state():
+	$HurtBoxComponet.monitoring = false
+	$CollisionShape2D.disabled = true
+	$Sprite.visible = false
+	explosion()
+	queue_free()
+
 func shoot():
 	var bullet = BULLET.instantiate()
 	
@@ -91,6 +102,16 @@ func shoot():
 	bullet.damage = damage
 	
 	get_tree().current_scene.add_child(bullet)
+
+func explosion():
+	var explosion_effect = EXPLOSION_EFFECT.instantiate()
+	
+	explosion_effect.position = global_position
+	
+	get_tree().current_scene.add_child(explosion_effect)
+
+func die():
+	state = States.DIE
 
 func _on_chase_zone_body_entered(body: Node2D) -> void:
 	if body.is_in_group("Player"):

@@ -14,6 +14,6 @@ func take_damage(damage : float):
 	health -= damage
 	
 	if health <= 0:
-		get_parent().queue_free() #change to .die() later
+		get_parent().die()
 		
 	health_changed.emit(health, max_health)
