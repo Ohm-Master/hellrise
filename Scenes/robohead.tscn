@@ -84,7 +84,19 @@ max_health = 30.0
 [node name="Shootpoint" type="Marker2D" parent="."]
 position = Vector2(36.666668, 0)
 
-[node name="RayCast2D" type="RayCast2D" parent="."]
+[node name="RayCast" type="RayCast2D" parent="."]
+collision_mask = 3
+
+[node name="Line2D" type="Line2D" parent="."]
+visible = false
+points = PackedVector2Array(-13.333334, -596, 159.33334, -571.3334, 268, -517.3334, 391.33334, -443.33334, 484.6667, -320, 558.6667, -132, 578.6667, 6, 548.6667, 173.33334, 494.6667, 341.33334, 342, 479.33334, 139.33334, 563.3334, -142, 578, -368.6667, 479.33334, -506.6667, 326.6667, -600.6667, 90, -600.6667, -98, -521.3334, -304.6667, -422.6667, -433.33334, -309.33334, -507.33334, -210.66667, -566.6667, -87.333336, -591.3334)
+
+[node name="Line2D2" type="Line2D" parent="."]
+visible = false
+position = Vector2(21.580206, 20.763807)
+scale = Vector2(1.2951639, 1.3070911)
+points = PackedVector2Array(-13.333334, -596, 159.33334, -571.3334, 268, -517.3334, 391.33334, -443.33334, 484.6667, -320, 558.6667, -132, 578.6667, 6, 548.6667, 173.33334, 471.307, 320.73987, 324.60742, 460.4904, 139.33334, 563.3334, -144.83125, 561.478, -351.24014, 467.1209, -506.6667, 326.6667, -600.6667, 90, -600.6667, -98, -521.3334, -304.6667, -422.6667, -433.33334, -309.33334, -507.33334, -210.66667, -566.6667, -87.333336, -591.3334)
+default_color = Color(0.083333254, 1, 0, 1)
 
 [connection signal="body_entered" from="Chase_zone3" to="." method="_on_chase_zone_body_entered"]
 [connection signal="body_exited" from="Chase_zone3" to="." method="_on_chase_zone_body_exited"]

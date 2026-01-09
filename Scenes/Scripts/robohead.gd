@@ -7,6 +7,7 @@ extends CharacterBody2D
 const BULLET = preload("uid://d1kqj34jeqaf")
 const EXPLOSION_EFFECT = preload("uid://b24hi0mxc88hi")
 
+@onready var raycast: RayCast2D = $RayCast
 @onready var sprite: AnimatedSprite2D = $Sprite
 @onready var shoot_point: Marker2D = $Shootpoint
 @export var player : CharacterBody2D
@@ -39,6 +40,9 @@ func _ready():
 func _physics_process(delta: float) -> void:
 	handle_states(delta)
 	move_and_slide()
+	
+	raycast.target_position = to_local(player.global_position)
+	raycast.force_raycast_update()
 
 func handle_states(delta : float):
 	match state:
@@ -72,7 +76,7 @@ func chase_state(delta : float):
 	
 	if not in_chase_zone and not damage_taken:
 		state = States.IDLE
-	if in_shoot_zone == true:
+	if in_shoot_zone:
 		state = States.SHOOT
 	
 func shoot_state(delta : float):
@@ -88,7 +92,7 @@ func shoot_state(delta : float):
 		shoot_timer -= delta
 	
 	if not in_shoot_zone:
-		state = States.SHOOT
+		state = States.CHASE
 
 func death_state():
 	$HurtBoxComponet.monitoring = false
@@ -107,7 +111,7 @@ func shoot():
 	
 	get_tree().current_scene.add_child(bullet)
 	
-	if in_shoot_zone == false:
+	if not in_shoot_zone:
 		state = States.CHASE
 
 func explosion():
@@ -122,16 +126,22 @@ func die():
 
 func _on_chase_zone_body_entered(body: Node2D) -> void:
 	if body.is_in_group("Player"):
-		in_chase_zone = true
-
+		var hit = raycast.get_collider()
+		if hit and hit.is_in_group("Player"):
+			in_chase_zone = true
+		else:
+			in_chase_zone = false
 func _on_chase_zone_body_exited(body: Node2D) -> void:
 	if body.is_in_group("Player"):
 		in_chase_zone = false
 
 func _on_shoot_zone_body_entered(body: Node2D) -> void:
 	if body.is_in_group("Player"):
-		in_shoot_zone = true
-
+		var hit = raycast.get_collider()
+		if hit and hit.is_in_group("Player"):
+			in_shoot_zone = true
+		else:
+			in_shoot_zone = false
 func _on_shoot_zone_body_exited(body: Node2D) -> void:
 	if body.is_in_group("Player"):
 		in_shoot_zone = false
