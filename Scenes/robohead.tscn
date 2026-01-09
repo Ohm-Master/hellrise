@@ -1,15 +1,29 @@
-[gd_scene load_steps=9 format=3 uid="uid://ku7br6u12kpi"]
+[gd_scene load_steps=11 format=3 uid="uid://ku7br6u12kpi"]
 
 [ext_resource type="Script" uid="uid://cllb38148e34w" path="res://Scenes/Scripts/robohead.gd" id="1_4xdy2"]
 [ext_resource type="Texture2D" uid="uid://f04r0r4dlxai" path="res://Assets/Robohead-1.png.png" id="2_4acy3"]
 [ext_resource type="PackedScene" uid="uid://dqphrfobu0tf6" path="res://Scenes/Componets/health_componet.tscn" id="3_3c42p"]
+[ext_resource type="Texture2D" uid="uid://sf0rbuvc150l" path="res://Assets/Robohead-2.png.png" id="3_4xdy2"]
 [ext_resource type="PackedScene" uid="uid://dgcsfuqox6cxu" path="res://Scenes/Componets/hurtbox_componet.tscn" id="4_v25xe"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_mo86q"]
-radius = 772.67706
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_mjyb1"]
-radius = 534.67334
+[sub_resource type="SpriteFrames" id="SpriteFrames_4acy3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_4acy3")
+}],
+"loop": true,
+"name": &"Attack",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_4xdy2")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mey23"]
 radius = 6.7999997
@@ -19,34 +33,22 @@ height = 19.999998
 radius = 33.0
 height = 98.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_mo86q"]
+radius = 770.7082
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4acy3"]
+radius = 592.6761
+
 [node name="Robohead" type="CharacterBody2D"]
 scale = Vector2(1.5, 1.5)
 collision_layer = 4
+collision_mask = 3
 script = ExtResource("1_4xdy2")
 
-[node name="Chase_zone" type="Area2D" parent="."]
-visible = false
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Chase_zone"]
-scale = Vector2(0.99999994, 0.99999994)
-shape = SubResource("CircleShape2D_mo86q")
-debug_color = Color(0, 1, 0, 0.09803922)
-
-[node name="Shoot_zone" type="Area2D" parent="."]
-visible = false
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Shoot_zone"]
-scale = Vector2(0.99999994, 0.99999994)
-shape = SubResource("CircleShape2D_mjyb1")
-debug_color = Color(1, 1, 0, 0.09803922)
-
-[node name="Sprite" type="Sprite2D" parent="."]
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
 rotation = -1.5707964
-texture = ExtResource("2_4acy3")
-
-[node name="HealthComponet" parent="." instance=ExtResource("3_3c42p")]
-rotation = -1.5707964
-max_health = 30.0
+sprite_frames = SubResource("SpriteFrames_4acy3")
+animation = &"Idle"
 
 [node name="HurtBoxComponet" parent="." node_paths=PackedStringArray("Health") groups=["Damageable"] instance=ExtResource("4_v25xe")]
 rotation = -1.5707964
@@ -62,14 +64,30 @@ debug_color = Color(1, 0, 0, 0.36078432)
 rotation = -1.5707964
 shape = SubResource("CapsuleShape2D_blx7o")
 
+[node name="Chase_zone3" type="Area2D" parent="."]
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Chase_zone3"]
+scale = Vector2(0.99999994, 0.99999994)
+shape = SubResource("CircleShape2D_mo86q")
+debug_color = Color(0, 1, 0, 0.09803922)
+
+[node name="Shoot_zone2" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Shoot_zone2"]
+shape = SubResource("CircleShape2D_4acy3")
+debug_color = Color(0.595, 0.7, 0, 0.41960785)
+
+[node name="HealthComponet" parent="." instance=ExtResource("3_3c42p")]
+rotation = -1.5707964
+max_health = 30.0
+
 [node name="Shootpoint" type="Marker2D" parent="."]
 position = Vector2(36.666668, 0)
 
-[node name="Idlepoint" type="Marker2D" parent="."]
-position = Vector2(0, 168)
+[node name="RayCast2D" type="RayCast2D" parent="."]
 
-[connection signal="body_entered" from="Chase_zone" to="." method="_on_chase_zone_body_entered"]
-[connection signal="body_exited" from="Chase_zone" to="." method="_on_chase_zone_body_exited"]
-[connection signal="body_entered" from="Shoot_zone" to="." method="_on_shoot_zone_body_entered"]
-[connection signal="body_exited" from="Shoot_zone" to="." method="_on_shoot_zone_body_exited"]
+[connection signal="body_entered" from="Chase_zone3" to="." method="_on_chase_zone_body_entered"]
+[connection signal="body_exited" from="Chase_zone3" to="." method="_on_chase_zone_body_exited"]
+[connection signal="body_entered" from="Shoot_zone2" to="." method="_on_shoot_zone_body_entered"]
+[connection signal="body_exited" from="Shoot_zone2" to="." method="_on_shoot_zone_body_exited"]
 [connection signal="health_changed" from="HealthComponet" to="." method="_on_health_changed"]

@@ -7,7 +7,7 @@ extends CharacterBody2D
 const BULLET = preload("uid://d1kqj34jeqaf")
 const EXPLOSION_EFFECT = preload("uid://b24hi0mxc88hi")
 
-@onready var sprite: Sprite2D = $Sprite
+@onready var sprite: AnimatedSprite2D = $Sprite
 @onready var shoot_point: Marker2D = $Shootpoint
 @export var player : CharacterBody2D
 
@@ -45,13 +45,14 @@ func handle_states(delta : float):
 		States.IDLE:
 			idle_state(delta)
 		States.CHASE:
-			chase_state()
+			chase_state(delta)
 		States.SHOOT:
 			shoot_state(delta)
 		States.DIE:
 			death_state()
 			
 func idle_state(delta : float):
+	sprite.play("Idle")
 	velocity = Vector2(0,0)
 	
 	bob_time += delta * bob_speed
@@ -61,8 +62,10 @@ func idle_state(delta : float):
 	if in_chase_zone or damage_taken:
 		state = States.CHASE
 	
-func chase_state():
-	look_at(player.global_position)
+func chase_state(delta : float):
+	var target_angle = global_position.angle_to_point(player.global_position)
+	rotation = lerp_angle(rotation, target_angle, 8.0 * delta)
+	sprite.play("Attack")
 	
 	var direction := global_position.direction_to(player.global_position)
 	velocity = direction * move_speed
@@ -73,6 +76,7 @@ func chase_state():
 		state = States.SHOOT
 	
 func shoot_state(delta : float):
+	sprite.play("Attack")
 	if player:
 		look_at(player.global_position)
 	velocity = Vector2(0,0)
@@ -102,6 +106,9 @@ func shoot():
 	bullet.damage = damage
 	
 	get_tree().current_scene.add_child(bullet)
+	
+	if in_shoot_zone == false:
+		state = States.CHASE
 
 func explosion():
 	var explosion_effect = EXPLOSION_EFFECT.instantiate()
