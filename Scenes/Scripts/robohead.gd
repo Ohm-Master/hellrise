@@ -41,7 +41,8 @@ func _physics_process(delta: float) -> void:
 	handle_states(delta)
 	move_and_slide()
 	
-	raycast.target_position = to_local(player.global_position)
+	if player:
+		raycast.target_position = to_local(player.global_position)
 	raycast.force_raycast_update()
 
 func handle_states(delta : float):
@@ -67,12 +68,13 @@ func idle_state(delta : float):
 		state = States.CHASE
 	
 func chase_state(delta : float):
-	var target_angle = global_position.angle_to_point(player.global_position)
-	rotation = lerp_angle(rotation, target_angle, 8.0 * delta)
-	sprite.play("Attack")
+	if player:
+		var target_angle = global_position.angle_to_point(player.global_position)
+		rotation = lerp_angle(rotation, target_angle, 8.0 * delta)		
+		var direction := global_position.direction_to(player.global_position)
+		velocity = direction * move_speed
 	
-	var direction := global_position.direction_to(player.global_position)
-	velocity = direction * move_speed
+	sprite.play("Attack")
 	
 	if not in_chase_zone and not damage_taken:
 		state = States.IDLE
