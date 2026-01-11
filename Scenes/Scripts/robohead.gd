@@ -15,7 +15,8 @@ const EXPLOSION_EFFECT = preload("uid://b24hi0mxc88hi")
 enum States {
 	IDLE,
 	CHASE,
-	SHOOT, 
+	SHOOT,
+	BACKUP, 
 	DIE
 }
 
@@ -23,6 +24,7 @@ var state = States.IDLE
 
 var in_chase_zone := false
 var in_shoot_zone := false
+var in_back_up_zone := false
 var damage_taken := false
 
 var move_speed := 600
@@ -54,6 +56,8 @@ func handle_states(delta : float):
 			chase_state(delta)
 		States.SHOOT:
 			shoot_state(delta)
+		States.BACKUP:
+			back_up_state(delta)
 		States.DIE:
 			death_state()
 			
@@ -95,8 +99,20 @@ func shoot_state(delta : float):
 	else:
 		shoot_timer -= delta
 	
+	if in_back_up_zone:
+		state = States.BACKUP
 	if not in_shoot_zone:
 		state = States.CHASE
+
+func back_up_state(delta : float):
+	if player:
+		var target_angle = global_position.angle_to_point(player.global_position)
+		rotation = lerp_angle(rotation, target_angle, 8.0 * delta)
+		var direction := global_position.direction_to(player.global_position)
+		velocity = -direction * move_speed
+	
+	if not in_back_up_zone:
+		state = States.SHOOT
 
 func death_state():
 	$HurtBoxComponet.monitoring = false
@@ -150,5 +166,16 @@ func _on_shoot_zone_body_exited(body: Node2D) -> void:
 	if body.is_in_group("Player"):
 		in_shoot_zone = false
 
+func _on_backup_zone_body_entered(body: Node2D) -> void:
+	if body.is_in_group("Player"):
+		var hit = raycast.get_collider()
+		if hit and hit.is_in_group("Player"):
+			in_back_up_zone = true
+		else:
+			in_back_up_zone = false
+func _on_backup_zone_body_exited(body: Node2D) -> void:
+	if body.is_in_group("Player"):
+		in_back_up_zone = false
+	
 func _on_health_changed(_currenthp: float, _maxhp: float) -> void:
 	damage_taken = true

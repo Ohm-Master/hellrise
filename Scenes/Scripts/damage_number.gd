@@ -33,7 +33,6 @@ func _process(delta: float) -> void:
 		tween.tween_property($Label, "modulate:a", 0.0, 0.1)
 		tween.finished.connect(queue_free)
 	
-	print(sin(bob_time) * bob_height)
 
 func final_hit():
 	$Label.label_settings.font_size = 50
