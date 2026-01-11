@@ -4,17 +4,16 @@
 
 [sub_resource type="LabelSettings" id="LabelSettings_2ojwd"]
 font_size = 35
-font_color = Color(1, 0, 0.016666412, 1)
-outline_size = 15
-outline_color = Color(0.37, 0, 0, 1)
+font_color = Color(1, 0, 0, 1)
+outline_size = 10
+outline_color = Color(0.41, 0, 0, 1)
 
 [node name="DamageNumber" type="Node2D"]
 script = ExtResource("1_n4jia")
 
 [node name="Label" type="Label" parent="."]
-offset_left = -19.0
-offset_top = -25.0
-offset_right = 27.0
-offset_bottom = 30.0
+offset_right = 40.0
+offset_bottom = 49.0
+theme_override_constants/outline_size = 9
 text = "30"
 label_settings = SubResource("LabelSettings_2ojwd")

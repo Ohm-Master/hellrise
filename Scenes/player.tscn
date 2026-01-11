@@ -72,7 +72,7 @@ shape = SubResource("CapsuleShape2D_x3wgy")
 debug_color = Color(1, 0, 0, 0.41960785)
 
 [node name="HealthComponet" parent="." instance=ExtResource("4_fkybt")]
-max_health = 150.0
+max_health = 9.223372e+18
 
 [node name="Pistol" parent="." instance=ExtResource("5_fkybt")]
 position = Vector2(-1, -40)
@@ -94,5 +94,8 @@ texture_progress = ExtResource("6_x3wgy")
 
 [node name="Smoke_point" type="Marker2D" parent="."]
 position = Vector2(0, 22)
+
+[node name="Dmg_num" type="Marker2D" parent="."]
+position = Vector2(2, -64)
 
 [connection signal="health_changed" from="HealthComponet" to="." method="_on_health_changed"]

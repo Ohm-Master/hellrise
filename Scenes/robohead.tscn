@@ -98,6 +98,9 @@ scale = Vector2(1.2951639, 1.3070911)
 points = PackedVector2Array(-13.333334, -596, 159.33334, -571.3334, 268, -517.3334, 391.33334, -443.33334, 484.6667, -320, 558.6667, -132, 578.6667, 6, 548.6667, 173.33334, 471.307, 320.73987, 324.60742, 460.4904, 139.33334, 563.3334, -144.83125, 561.478, -351.24014, 467.1209, -506.6667, 326.6667, -600.6667, 90, -600.6667, -98, -521.3334, -304.6667, -422.6667, -433.33334, -309.33334, -507.33334, -210.66667, -566.6667, -87.333336, -591.3334)
 default_color = Color(0.083333254, 1, 0, 1)
 
+[node name="Dmg_num" type="Marker2D" parent="."]
+position = Vector2(-52.666668, 0)
+
 [connection signal="body_entered" from="Chase_zone3" to="." method="_on_chase_zone_body_entered"]
 [connection signal="body_exited" from="Chase_zone3" to="." method="_on_chase_zone_body_exited"]
 [connection signal="body_entered" from="Shoot_zone2" to="." method="_on_shoot_zone_body_entered"]

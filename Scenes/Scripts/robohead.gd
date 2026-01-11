@@ -44,6 +44,10 @@ func _physics_process(delta: float) -> void:
 	if player:
 		raycast.target_position = to_local(player.global_position)
 	raycast.force_raycast_update()
+	
+	var hit = raycast.get_collider()
+	if hit and hit.is_in_group("Player"):
+		in_chase_zone = true
 
 func handle_states(delta : float):
 	match state:
