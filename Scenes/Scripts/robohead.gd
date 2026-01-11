@@ -45,9 +45,6 @@ func _physics_process(delta: float) -> void:
 		raycast.target_position = to_local(player.global_position)
 	raycast.force_raycast_update()
 	
-	var hit = raycast.get_collider()
-	if hit and hit.is_in_group("Player"):
-		in_chase_zone = true
 
 func handle_states(delta : float):
 	match state:
@@ -74,7 +71,7 @@ func idle_state(delta : float):
 func chase_state(delta : float):
 	if player:
 		var target_angle = global_position.angle_to_point(player.global_position)
-		rotation = lerp_angle(rotation, target_angle, 8.0 * delta)		
+		rotation = lerp_angle(rotation, target_angle, 8.0 * delta)
 		var direction := global_position.direction_to(player.global_position)
 		velocity = direction * move_speed
 	
@@ -88,7 +85,8 @@ func chase_state(delta : float):
 func shoot_state(delta : float):
 	sprite.play("Attack")
 	if player:
-		look_at(player.global_position)
+		var target_angle = global_position.angle_to_point(player.global_position)
+		rotation = lerp_angle(rotation, target_angle, 8.0 * delta)
 	velocity = Vector2(0,0)
 	
 	if shoot_timer <= 0:
