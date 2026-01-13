@@ -14,13 +14,14 @@ var move_speed := 700.0
 
 var can_double_jump := true
 
+var fade_tween : Tween
+
 func _ready() -> void:
 	state_machine.init(self)
 	#Fades out HP bar
-	var tween := create_tween() 
 	%Health_bar.modulate.a = 1
-	
-	tween.tween_property(%Health_bar, "modulate:a", 0.0, 1.0)
+	fade_tween = create_tween()
+	fade_tween.tween_property(%Health_bar, "modulate:a", 0.0, 1.0)
 
 func _physics_process(delta: float) -> void:
 	state_machine.process_physics(delta)
@@ -68,11 +69,12 @@ func die():
 	queue_free()
 
 func _on_health_changed(currenthp: float, maxhp: float) -> void:
-	
-	var tween := create_tween()
-	
 	%Health_bar.value = currenthp
 	%Health_bar.max_value = maxhp
 	%Health_bar.modulate.a = 1
 		
-	tween.tween_property(%Health_bar, "modulate:a", 0.0, 1.0)
+	if fade_tween and fade_tween.is_running():
+		fade_tween.kill()
+	
+	fade_tween = create_tween()
+	fade_tween.tween_property(%Health_bar, "modulate:a", 0.0, 1.0)

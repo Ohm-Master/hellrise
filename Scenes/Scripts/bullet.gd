@@ -12,5 +12,5 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	position += Vector2.RIGHT.rotated(rotation) * speed * delta
 
-func _on_body_entered(body: Node2D) -> void:
+func _on_body_entered(_body: Node2D) -> void:
 	queue_free()

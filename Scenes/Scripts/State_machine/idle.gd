@@ -4,9 +4,6 @@ extends State
 @export var move_state : State
 @export var jump_state : State
 
-func enter() -> void:
-	super()
-
 func process_input(_event: InputEvent) -> State:
 	if Input.is_action_just_pressed("Jump"):
 		return jump_state
@@ -15,7 +12,7 @@ func process_input(_event: InputEvent) -> State:
 	return null
 
 func process_physics(_delta: float) -> State:
-	parent.velocity.x = move_toward(parent.velocity.x, 0, move_speed / 9)
+	parent.velocity.x = move_toward(parent.velocity.x, 0, move_speed / 2)
 	
 	if not parent.is_on_floor():
 		return fall_state

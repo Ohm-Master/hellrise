@@ -5,14 +5,15 @@ class_name Double_jump_state
 @export var fall_state : State
 
 func enter() -> void:
-	super()
 	parent.velocity.y = jump_force
 	parent.add_smoke()
 	parent.can_double_jump = false
 	
-func process_physics(delta: float) -> State:
-	var movement := Input.get_axis("Left", "Right") * move_speed
-	parent.velocity.x = movement
+func process_physics(_delta: float) -> State:
+	if Input.is_action_pressed("Left"):
+		parent.velocity.x = -move_speed
+	elif Input.is_action_pressed("Right"):
+		parent.velocity.x = move_speed
 	
 	if parent.velocity.y > 0:
 		return fall_state

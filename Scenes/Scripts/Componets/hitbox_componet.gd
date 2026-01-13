@@ -5,9 +5,18 @@ class_name HurtBox
 @export var damage : float
 var parent
 
+var has_hit := false
+
 func _on_area_entered(area: Area2D) -> void:
+	if has_hit:
+		return
+
+	if area != parent:
+		has_hit = true
+
 	if area == parent:
 		return
+
 	elif area.is_in_group("Damageable"):
 		area.damage(damage)
 		get_parent().queue_free()

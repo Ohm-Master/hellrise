@@ -3,6 +3,8 @@
 [ext_resource type="Script" uid="uid://70bdcsqdnxxv" path="res://Scenes/Scripts/Componets/hitbox_componet.gd" id="1_ana0v"]
 
 [node name="Hitboxcomponet" type="Area2D"]
+collision_layer = 0
+collision_mask = 5
 script = ExtResource("1_ana0v")
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
