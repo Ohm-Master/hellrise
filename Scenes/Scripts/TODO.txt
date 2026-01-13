@@ -4,7 +4,7 @@ TODO:
 		Add wall grab/slide/dash.
 		Add dash.
 	Guns:
-		Add pistol cooldown.
+		✅Add pistol cooldown.
 		Add shotgun pellet.
 		Add shotgun.
 	Enemies:
@@ -13,6 +13,7 @@ TODO:
 		Draw vertical brick texture.
 		Draw alt pistol texture.  
 		Draw lucifer texture
+		Draw 1st boss texture (Guardian of heaven)
 	Bugs:
 		✅Fix player stopping when pressing A and D at the same time.
 		✅Fix bullets sometimes doing double damage.

@@ -19,7 +19,9 @@ func process_physics(_delta: float) -> State:
 		parent.velocity.x = -move_speed
 	elif Input.is_action_pressed("Right"):
 		parent.velocity.x = move_speed
-	
+	else:
+		parent.velocity.x = 0
+		
 	if parent.is_on_floor():
 		if parent.velocity.x != 0:
 			return move_state

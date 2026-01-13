@@ -5,13 +5,12 @@ class_name Player
 const JUMP_SMOKE = preload("uid://ehwk1mq7udbc")
 
 @onready var state_machine: Node = $State_machine
+@onready var ray_cast: RayCast2D = $RayCast
+@onready var sprite: Node2D = $Sprite
 
 var gravity := 1500.0
 var jump_force := -750.0
 var move_speed := 700.0
-
-@onready var sprite: Node2D = $Sprite
-
 var can_double_jump := true
 
 var fade_tween : Tween
