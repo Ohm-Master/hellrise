@@ -1,0 +1,133 @@
+[gd_scene load_steps=7 format=3 uid="uid://grr2hkefsyy2"]
+
+[ext_resource type="Texture2D" uid="uid://b45f32hyghs12" path="res://Assets/TheCrucifier/crucified-2.png.png" id="1_ywlhq"]
+[ext_resource type="Texture2D" uid="uid://cppwjwd7yyhej" path="res://Assets/TheCrucifier/crucified-2.png (3).png" id="2_ryxp3"]
+[ext_resource type="Texture2D" uid="uid://c1yee757ipqqe" path="res://Assets/TheCrucifier/crucified-2.png (2).png" id="3_1hkux"]
+[ext_resource type="Texture2D" uid="uid://bj67rukguev33" path="res://Assets/TheCrucifier/crucified-2.png (1).png" id="4_rre01"]
+
+[sub_resource type="Animation" id="Animation_vgmsu"]
+resource_name = "RESET"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Head:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Head:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Left_wing:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-180, -5)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Left_wing:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Rigth_wing:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(180, 0)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Rigth_wing:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Halo:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-2, -57)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Halo:rotation")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_f3pw3"]
+_data = {
+&"RESET": SubResource("Animation_vgmsu")
+}
+
+[node name="Crucifier-sprite" type="Node2D"]
+
+[node name="Head" type="Sprite2D" parent="."]
+texture = ExtResource("1_ywlhq")
+
+[node name="Left_wing" type="Sprite2D" parent="."]
+position = Vector2(-180, -5)
+texture = ExtResource("2_ryxp3")
+
+[node name="Rigth_wing" type="Sprite2D" parent="."]
+position = Vector2(180, 0)
+texture = ExtResource("3_1hkux")
+
+[node name="Halo" type="Sprite2D" parent="."]
+self_modulate = Color(1, 0.94400007, 0.16000003, 1)
+position = Vector2(-2, -57)
+texture = ExtResource("4_rre01")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_f3pw3")
+}

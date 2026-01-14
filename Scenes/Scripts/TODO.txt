@@ -10,12 +10,13 @@ TODO:
 	Enemies:
 		Add new enemy.
 	Art:
-		Draw vertical brick texture.
-		Draw alt pistol texture.  
+		✅Draw vertical brick texture.
+		✅Draw alt pistol texture.  
 		Draw lucifer texture
 		Draw 1st boss texture (Guardian of heaven)
 	Bugs:
 		✅Fix player stopping when pressing A and D at the same time.
 		✅Fix bullets sometimes doing double damage.
 		✅Fix health bar not fading when hit in quick succession. 
+		Fix all floating damage numbers increasing size when final hit
 	
