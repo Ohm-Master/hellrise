@@ -14,14 +14,21 @@ func _ready() -> void:
 	randomize()
 
 func take_damage(damage : float):
+	var was_killed := false
+	
+	if damage >= health:
+		was_killed = true
+	else:
+		was_killed = false
 	health -= damage
+
+		
 	var dmg_num = DAMAGE_NUMBER.instantiate()
 	dmg_num.position = global_position + Vector2(randf_range(-100, 0), -100 + randf_range(-30, -0))
-	dmg_num.setup(damage)
+	dmg_num.setup(damage, was_killed)
 	get_tree().current_scene.add_child(dmg_num)
 
 	if health <= 0:
 		get_parent().die()
-		dmg_num.final_hit()
 		
 	health_changed.emit(health, max_health)

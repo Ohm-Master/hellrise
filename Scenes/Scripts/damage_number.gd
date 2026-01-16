@@ -12,6 +12,7 @@ var sway_length := 50.0
 var sway_direction := randf() < 0.5
 
 var timer : float = 0.4
+var is_final_hit := false
 
 func _ready() -> void:
 	$Label.rotation_degrees = randi_range(-35, 35)
@@ -31,11 +32,14 @@ func _process(delta: float) -> void:
 	if timer <= 0:
 		var tween := create_tween()
 		tween.tween_property($Label, "modulate:a", 0.0, 0.1)
-		tween.finished.connect(queue_free)
+		await tween.finished
+		queue_free()
 	
-
-func final_hit():
-	$Label.label_settings.font_size = 50
-
-func setup(amount):
+func setup(amount : float, was_killed : bool):
+	$Label.label_settings = $Label.label_settings.duplicate()
+	if was_killed:
+		$Label.label_settings.font_size = 50
+	else:
+		$Label.label_settings.font_size = 35
+	
 	$Label.text = "-" + str(amount)
