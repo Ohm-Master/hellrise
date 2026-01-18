@@ -10,8 +10,16 @@ const JUMP_SMOKE = preload("uid://ehwk1mq7udbc")
 
 var gravity := 1500.0
 var jump_force := -750.0
-var move_speed := 700.0
+var move_speed := 850.0
+var slide_speed := 1200.0
+var air_drag := 500.0
 var can_double_jump := true
+
+enum DIR {
+	LEFT,
+	RIGHT,
+}
+var direction : DIR
 
 var fade_tween : Tween
 
@@ -52,10 +60,12 @@ func handle_animations():
 		else:
 			sprite.play("fall")
 		
-	#flip the sprite
+	#flip the sprite and calculate dir
 	if velocity.x > 0:
 		sprite.scale.x = 1
+		direction = DIR.RIGHT
 	elif velocity.x < 0:
+		direction = DIR.LEFT
 		sprite.scale.x = -1
 		
 func add_smoke():

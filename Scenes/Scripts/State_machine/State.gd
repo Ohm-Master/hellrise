@@ -3,6 +3,7 @@ extends Node
 class_name State
 
 var parent : Player
+var last_state : State
 
 var move_speed : float = 700.0
 var gravity : float = 1500.0

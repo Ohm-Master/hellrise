@@ -42,10 +42,8 @@ func _ready():
 func _physics_process(delta: float) -> void:
 	handle_states(delta)
 	move_and_slide()
-	
-	if player:
-		raycast.target_position = to_local(player.global_position)
-	raycast.force_raycast_update()
+	calculate_zones()
+
 	
 
 func handle_states(delta : float):
@@ -63,12 +61,12 @@ func handle_states(delta : float):
 			
 func idle_state(delta : float):
 	sprite.play("Idle")
-	velocity = Vector2(0,0)
+	velocity = velocity.move_toward(Vector2.ZERO, move_speed / 2)
 	
 	bob_time += delta * bob_speed
 	sprite.position.x = sin(bob_time) * bob_height
-	
-	rotation_degrees = 90
+
+	rotation = lerp_angle(rotation, PI / 2, 2 * delta)
 	if in_chase_zone or damage_taken:
 		state = States.CHASE
 	
@@ -91,7 +89,7 @@ func shoot_state(delta : float):
 	if player:
 		var target_angle = global_position.angle_to_point(player.global_position)
 		rotation = lerp_angle(rotation, target_angle, 8.0 * delta)
-	velocity = Vector2(0,0)
+	velocity = velocity.move_toward(Vector2.ZERO, move_speed / 2)
 	
 	if shoot_timer <= 0:
 		shoot()
@@ -144,6 +142,26 @@ func explosion():
 func die():
 	state = States.DIE
 
+func calculate_zones():
+	if player:
+		raycast.target_position = to_local(player.global_position)
+		raycast.force_raycast_update()
+		var hit = raycast.get_collider()
+		if hit and not hit.is_in_group("Player"):
+			in_shoot_zone = false
+			in_chase_zone = false
+		else:
+			for i in $Chase_zone.get_overlapping_bodies():
+				if i.is_in_group("Player"):
+					in_chase_zone = true
+					break
+			for i in $Shoot_zone.get_overlapping_bodies():
+				if i.is_in_group("Player"):
+					in_shoot_zone = true
+					break
+			
+
+	
 func _on_chase_zone_body_entered(body: Node2D) -> void:
 	if body.is_in_group("Player"):
 		var hit = raycast.get_collider()
@@ -151,7 +169,6 @@ func _on_chase_zone_body_entered(body: Node2D) -> void:
 			in_chase_zone = true
 		else:
 			in_chase_zone = false
-func _on_chase_zone_body_exited(body: Node2D) -> void:
 	if body.is_in_group("Player"):
 		in_chase_zone = false
 

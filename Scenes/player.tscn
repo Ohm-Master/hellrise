@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://b5l1ovitylfo2"]
+[gd_scene load_steps=16 format=3 uid="uid://b5l1ovitylfo2"]
 
 [ext_resource type="Script" uid="uid://du44c4274je2s" path="res://Scenes/Scripts/player.gd" id="1_cvnsp"]
 [ext_resource type="PackedScene" uid="uid://bh57son8vxqxh" path="res://Scenes/The_Spy.tscn" id="1_v0iea"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://dds0alum3pwcx" path="res://Assets/Health bar-1.png.png" id="6_x3wgy"]
 [ext_resource type="Script" uid="uid://6bmuw7drnpuc" path="res://Scenes/Scripts/State_machine/state_machine.gd" id="7_3smsa"]
 [ext_resource type="Script" uid="uid://dt80swajhbh10" path="res://Scenes/Scripts/State_machine/idle.gd" id="8_8erm5"]
+[ext_resource type="Script" uid="uid://jkwgd2lasxme" path="res://Scenes/slide.gd" id="8_ukyrk"]
 [ext_resource type="Script" uid="uid://drnjfiut87vhp" path="res://Scenes/Scripts/State_machine/jump.gd" id="9_gymyn"]
 [ext_resource type="Script" uid="uid://dybi5168rawy4" path="res://Scenes/Scripts/State_machine/fall.gd" id="10_pu2lt"]
 [ext_resource type="Script" uid="uid://cnm3gxnaiwubb" path="res://Scenes/Scripts/State_machine/move.gd" id="11_ukyrk"]
@@ -30,11 +31,12 @@ script = ExtResource("1_cvnsp")
 script = ExtResource("7_3smsa")
 starting_state = NodePath("Idle")
 
-[node name="Idle" type="Node" parent="State_machine" node_paths=PackedStringArray("fall_state", "move_state", "jump_state")]
+[node name="Idle" type="Node" parent="State_machine" node_paths=PackedStringArray("fall_state", "move_state", "jump_state", "slide_state")]
 script = ExtResource("8_8erm5")
 fall_state = NodePath("../Fall")
 move_state = NodePath("../Move")
 jump_state = NodePath("../Jump")
+slide_state = NodePath("../Slide")
 
 [node name="Jump" type="Node" parent="State_machine" node_paths=PackedStringArray("fall_state", "double_jump_state")]
 script = ExtResource("9_gymyn")
@@ -47,15 +49,24 @@ move_state = NodePath("../Move")
 idle_state = NodePath("../Idle")
 double_jump_state = NodePath("../Double_jump")
 
-[node name="Move" type="Node" parent="State_machine" node_paths=PackedStringArray("fall_state", "idle_state", "jump_state")]
+[node name="Double_jump" type="Node" parent="State_machine" node_paths=PackedStringArray("fall_state")]
+script = ExtResource("12_pu2lt")
+fall_state = NodePath("../Fall")
+
+[node name="Move" type="Node" parent="State_machine" node_paths=PackedStringArray("fall_state", "idle_state", "jump_state", "slide_state")]
 script = ExtResource("11_ukyrk")
 fall_state = NodePath("../Fall")
 idle_state = NodePath("../Idle")
 jump_state = NodePath("../Jump")
+slide_state = NodePath("../Slide")
 
-[node name="Double_jump" type="Node" parent="State_machine" node_paths=PackedStringArray("fall_state")]
-script = ExtResource("12_pu2lt")
+[node name="Slide" type="Node" parent="State_machine" node_paths=PackedStringArray("fall_state", "idle_state", "move_state", "jump_state", "double_jump_state")]
+script = ExtResource("8_ukyrk")
 fall_state = NodePath("../Fall")
+idle_state = NodePath("../Idle")
+move_state = NodePath("../Move")
+jump_state = NodePath("../Jump")
+double_jump_state = NodePath("../Double_jump")
 
 [node name="Sprite" parent="." instance=ExtResource("1_v0iea")]
 

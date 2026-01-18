@@ -3,6 +3,7 @@ extends Node
 @export var starting_state : State
 
 var current_state : State
+var last_state : State
 
 func init(parent : Player):
 	for child in get_children():
@@ -14,6 +15,9 @@ func init(parent : Player):
 func change_state(new_state : State):
 	if current_state:
 		current_state.exit()
+	last_state = current_state
+	for child in get_children():
+		child.last_state = last_state
 	current_state = new_state
 	current_state.enter()
 	

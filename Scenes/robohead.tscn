@@ -68,6 +68,7 @@ rotation = -1.5707964
 shape = SubResource("CapsuleShape2D_blx7o")
 
 [node name="Chase_zone" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Chase_zone"]
@@ -76,6 +77,7 @@ shape = SubResource("CircleShape2D_mo86q")
 debug_color = Color(0, 1, 0, 0.09803922)
 
 [node name="Shoot_zone" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Shoot_zone"]
@@ -83,6 +85,7 @@ shape = SubResource("CircleShape2D_4acy3")
 debug_color = Color(0.595, 0.7, 0, 0.41960785)
 
 [node name="Backup_zone" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Backup_zone"]
@@ -97,6 +100,7 @@ max_health = 30.0
 position = Vector2(36.666668, 0)
 
 [node name="RayCast" type="RayCast2D" parent="."]
+position = Vector2(36.666668, 0)
 collision_mask = 3
 
 [node name="Line2D" type="Line2D" parent="."]
