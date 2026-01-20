@@ -12,8 +12,10 @@ var gravity := 1500.0
 var jump_force := -750.0
 var move_speed := 850.0
 var slide_speed := 1200.0
+var air_speed := 850.0
 var air_drag := 500.0
 var can_double_jump := true
+var is_sliding := false
 
 enum DIR {
 	LEFT,

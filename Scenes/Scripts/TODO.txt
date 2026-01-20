@@ -1,14 +1,22 @@
 TODO:
 	Player:
-		Add crouch/slide.
+		✅Add crouch/slide.
 		Add wall grab/slide/dash.
 		Add dash.
+		Add jump buffering.
+		Add coyote time.
 	Guns:
 		✅Add pistol cooldown.
+		Add a Gun comoponent.
 		Add shotgun pellet.
 		Add shotgun.
 	Enemies:
 		Add new enemy.
+	Animations:
+		Add animation queuing for sprite
+		Make dash anim
+		Make slide anim
+		Make wall grab anim
 	Art:
 		✅Draw vertical brick texture.
 		✅Draw alt pistol texture.  

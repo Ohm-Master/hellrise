@@ -4,7 +4,7 @@ const BULLET : PackedScene = preload("uid://d1kqj34jeqaf")
 
 @onready var shoot_point: Marker2D = $Pivot_point/Pistol/Shoot_point
 
-var damage := 10.0
+@export var damage := 10.0
 var can_shoot := true
 var cooldown := 0.3
 var cooldown_timer := 0.0

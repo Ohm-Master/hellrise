@@ -9,6 +9,7 @@ class_name Slide_state
 @export var double_jump_state : State
 
 func enter() -> void:
+	parent.is_sliding = true
 	if parent.direction == parent.DIR.RIGHT:
 		parent.velocity.x = parent.slide_speed
 	elif parent.direction == parent. DIR.LEFT:
@@ -21,6 +22,7 @@ func process_input(_event: InputEvent) -> State:
 		else:
 			return double_jump_state
 	elif Input.is_action_just_released("Slide"):
+		parent.is_sliding = false
 		if parent.is_on_floor():
 			var movement := Input.get_axis("Left", "Right")
 			if movement:
