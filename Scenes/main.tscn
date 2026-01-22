@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=4 uid="uid://b1jqa11vjlr1n"]
+[gd_scene load_steps=6 format=4 uid="uid://b1jqa11vjlr1n"]
 
 [ext_resource type="Texture2D" uid="uid://d0ygimt7agnuj" path="res://Assets/Bricks.png" id="2_8gbba"]
 [ext_resource type="PackedScene" uid="uid://b5l1ovitylfo2" path="res://Scenes/player.tscn" id="2_bo1nx"]
+[ext_resource type="PackedScene" uid="uid://ku7br6u12kpi" path="res://Scenes/robohead.tscn" id="3_8gbba"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jjvhh"]
 texture = ExtResource("2_8gbba")
@@ -64,3 +65,7 @@ position = Vector2(-1393, -973)
 zoom = Vector2(0.4, 0.4)
 position_smoothing_enabled = true
 position_smoothing_speed = 7.5
+
+[node name="Robohead" parent="." node_paths=PackedStringArray("player") instance=ExtResource("3_8gbba")]
+position = Vector2(-539, -364)
+player = NodePath("../Player")

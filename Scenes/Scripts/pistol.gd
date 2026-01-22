@@ -3,6 +3,7 @@ extends Node2D
 const BULLET : PackedScene = preload("uid://d1kqj34jeqaf")
 
 @onready var shoot_point: Marker2D = $Pivot_point/Pistol/Shoot_point
+@onready var ray_cast_2d: RayCast2D = $RayCast2D
 
 @export var damage := 10.0
 var can_shoot := true
@@ -12,8 +13,10 @@ var cooldown_timer := 0.0
 func _process(delta: float) -> void:
 	look_at(get_global_mouse_position())
 	
+	
 	if cooldown_timer <= 0:
-		can_shoot = true
+		if !ray_cast_2d.is_colliding():
+			can_shoot = true
 	else:
 		can_shoot = false
 		

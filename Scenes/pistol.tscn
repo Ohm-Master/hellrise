@@ -15,3 +15,7 @@ flip_v = true
 
 [node name="Shoot_point" type="Marker2D" parent="Pivot_point/Pistol"]
 position = Vector2(43, 8)
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+target_position = Vector2(248, 0)
+collision_mask = 2

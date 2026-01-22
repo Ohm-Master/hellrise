@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://drrkmhilme2oh" path="res://Scenes/Scripts/damage_number.gd" id="1_n4jia"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_2ojwd"]
-font_size = 35
+font_size = 40
 font_color = Color(1, 0, 0.016666412, 1)
 outline_size = 15
 outline_color = Color(0.37, 0, 0, 1)
@@ -12,9 +12,9 @@ outline_color = Color(0.37, 0, 0, 1)
 script = ExtResource("1_n4jia")
 
 [node name="Label" type="Label" parent="."]
-offset_left = -19.0
-offset_top = -25.0
-offset_right = 27.0
-offset_bottom = 30.0
+offset_left = -23.0
+offset_top = -28.0
+offset_right = 23.0
+offset_bottom = 27.0
 text = "30"
 label_settings = SubResource("LabelSettings_2ojwd")

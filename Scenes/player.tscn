@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://dds0alum3pwcx" path="res://Assets/Health bar-1.png.png" id="6_x3wgy"]
 [ext_resource type="Script" uid="uid://6bmuw7drnpuc" path="res://Scenes/Scripts/State_machine/state_machine.gd" id="7_3smsa"]
 [ext_resource type="Script" uid="uid://dt80swajhbh10" path="res://Scenes/Scripts/State_machine/idle.gd" id="8_8erm5"]
-[ext_resource type="Script" uid="uid://jkwgd2lasxme" path="res://Scenes/slide.gd" id="8_ukyrk"]
+[ext_resource type="Script" uid="uid://jkwgd2lasxme" path="res://Scenes/Scripts/State_machine/slide.gd" id="8_ukyrk"]
 [ext_resource type="Script" uid="uid://drnjfiut87vhp" path="res://Scenes/Scripts/State_machine/jump.gd" id="9_gymyn"]
 [ext_resource type="Script" uid="uid://dybi5168rawy4" path="res://Scenes/Scripts/State_machine/fall.gd" id="10_pu2lt"]
 [ext_resource type="Script" uid="uid://cnm3gxnaiwubb" path="res://Scenes/Scripts/State_machine/move.gd" id="11_ukyrk"]
@@ -84,7 +84,7 @@ shape = SubResource("CapsuleShape2D_x3wgy")
 debug_color = Color(1, 0, 0, 0.41960785)
 
 [node name="HealthComponet" parent="." instance=ExtResource("4_fkybt")]
-max_health = 150.0
+max_health = 1e+38
 
 [node name="Pistol" parent="." instance=ExtResource("5_fkybt")]
 position = Vector2(-1, -40)

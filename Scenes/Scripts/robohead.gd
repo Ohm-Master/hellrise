@@ -37,6 +37,7 @@ var bob_speed := 5.0
 var bob_height := 10.0
 
 func _ready():
+	$HurtBoxComponet.parent = "Enemy"
 	shoot_timer = 0
 
 func _physics_process(delta: float) -> void:
@@ -125,6 +126,7 @@ func shoot():
 	bullet.position = shoot_point.global_position
 	bullet.rotation = shoot_point.global_rotation
 	bullet.parent = $HurtBoxComponet
+	bullet.the_owner = "Enemy"
 	bullet.damage = damage
 	
 	get_tree().current_scene.add_child(bullet)

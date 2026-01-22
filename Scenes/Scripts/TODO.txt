@@ -5,6 +5,7 @@ TODO:
 		Add dash.
 		Add jump buffering.
 		Add coyote time.
+		Add health bar with numbers.
 	Guns:
 		✅Add pistol cooldown.
 		Add a Gun comoponent.
@@ -12,6 +13,8 @@ TODO:
 		Add shotgun.
 	Enemies:
 		Add new enemy.
+		Make explosion do knockback.
+		Make it so enemies do less damage when hit other enemies.
 	Animations:
 		Add animation queuing for sprite
 		Make dash anim
@@ -24,7 +27,8 @@ TODO:
 		✅Draw 1st boss texture (Guardian of heaven)
 	Bugs:
 		✅Fix player stopping when pressing A and D at the same time.
-		Fix bullets sometimes doing double damage.
+		✅Fix bullets sometimes doing double damage.
+		✅Fix Gun being able to shoot throu walls.
 		✅Fix health bar not fading when hit in quick succession. 
 		✅Fix all floating damage numbers increasing size when final hit
 	
