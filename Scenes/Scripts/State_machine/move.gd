@@ -8,13 +8,15 @@ class_name Move_state
 @export var slide_state : State
 
 func process_input(_event: InputEvent) -> State:
+	if Input.is_action_pressed("Jump"):
+		return jump_state
 	if Input.is_action_just_pressed("Slide"):
 		return slide_state
-	if Input.is_action_just_pressed("Jump"):
-		return jump_state
 	return null
 
 func process_physics(_delta: float) -> State:
+	if parent.has_buffered_jump():
+		return jump_state
 	
 	if Input.is_action_pressed("Left"):
 		parent.velocity.x = -parent.move_speed

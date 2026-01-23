@@ -19,10 +19,10 @@ func change_state(new_state : State):
 	for child in get_children():
 		child.last_state = last_state
 	current_state = new_state
+	print(current_state)
 	current_state.enter()
 	
 func process_physics(delta: float) -> void:
-	print(current_state)
 	var new_state = current_state.process_physics(delta)
 	if new_state:
 		change_state(new_state)

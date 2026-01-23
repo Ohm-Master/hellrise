@@ -16,6 +16,9 @@ var air_drag := 500.0
 var can_double_jump := true
 var is_sliding := false
 
+var jump_buffer_timer := 0.0
+var jump_buffer := 0.1
+
 enum DIR {
 	LEFT,
 	RIGHT,
@@ -39,9 +42,12 @@ func _physics_process(delta: float) -> void:
 	
 func _input(event: InputEvent) -> void:
 	state_machine.process_input(event)
+	if Input.is_action_pressed("Jump"):
+		jump_buffer_timer = jump_buffer
 	
 func _process(delta: float) -> void:
 	state_machine.process_frame(delta)
+	jump_buffer_timer -= delta
 
 func apply_gravitiy(delta : float):
 	if not is_on_floor():
@@ -74,6 +80,9 @@ func add_smoke():
 	smoke.position = $Smoke_point.global_position
 	get_tree().current_scene.add_child(smoke)
 	smoke.play()
+
+func has_buffered_jump() -> bool:
+	return jump_buffer_timer > 0
 
 func die():
 	queue_free()

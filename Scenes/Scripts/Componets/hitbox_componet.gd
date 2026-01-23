@@ -20,6 +20,8 @@ func _on_area_entered(area: Area2D) -> void:
 			return
 		area.hitbox_parent = the_owner
 		area.damage(damage)
+		if has_hit:
+			return
 		has_hit = true
 		get_parent().queue_free()
 		return

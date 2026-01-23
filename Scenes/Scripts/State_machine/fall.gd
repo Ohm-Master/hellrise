@@ -5,6 +5,7 @@ class_name Fall_state
 @export var move_state : State
 @export var idle_state : State
 @export var double_jump_state : State
+@export var jump_state : State
 
 func enter() -> void:
 	parent.velocity.y = 0

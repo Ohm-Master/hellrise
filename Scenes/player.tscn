@@ -43,11 +43,12 @@ script = ExtResource("9_gymyn")
 fall_state = NodePath("../Fall")
 double_jump_state = NodePath("../Double_jump")
 
-[node name="Fall" type="Node" parent="State_machine" node_paths=PackedStringArray("move_state", "idle_state", "double_jump_state")]
+[node name="Fall" type="Node" parent="State_machine" node_paths=PackedStringArray("move_state", "idle_state", "double_jump_state", "jump_state")]
 script = ExtResource("10_pu2lt")
 move_state = NodePath("../Move")
 idle_state = NodePath("../Idle")
 double_jump_state = NodePath("../Double_jump")
+jump_state = NodePath(".")
 
 [node name="Double_jump" type="Node" parent="State_machine" node_paths=PackedStringArray("fall_state")]
 script = ExtResource("12_pu2lt")
