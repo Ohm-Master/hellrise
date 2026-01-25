@@ -14,7 +14,7 @@ func process_input(_event: InputEvent) -> State:
 		return slide_state
 	return null
 
-func process_physics(_delta: float) -> State:
+func process_physics(delta: float) -> State:
 	if parent.has_buffered_jump():
 		return jump_state
 	
@@ -28,7 +28,10 @@ func process_physics(_delta: float) -> State:
 	if parent.velocity.x == 0:
 		return idle_state
 	if not parent.is_on_floor():
-		return fall_state
+		if parent.coyote_timer <= 0: 
+			return fall_state
+	else:
+		parent.coyote_timer = parent.coyote_time
 	
 	return null
 	

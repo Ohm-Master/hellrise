@@ -19,6 +19,9 @@ var is_sliding := false
 var jump_buffer_timer := 0.0
 var jump_buffer := 0.1
 
+var coyote_time := 0.2
+var coyote_timer := 0.0
+
 enum DIR {
 	LEFT,
 	RIGHT,
@@ -48,6 +51,7 @@ func _input(event: InputEvent) -> void:
 func _process(delta: float) -> void:
 	state_machine.process_frame(delta)
 	jump_buffer_timer -= delta
+	coyote_timer -= delta
 
 func apply_gravitiy(delta : float):
 	if not is_on_floor():
