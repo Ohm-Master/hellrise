@@ -7,6 +7,8 @@ const JUMP_SMOKE = preload("uid://ehwk1mq7udbc")
 @onready var state_machine: Node = $State_machine
 @onready var sprite: Node2D = $Sprite
 
+const FRICTION := 350.0
+
 var gravity := 1500.0
 var jump_force := -750.0
 var move_speed := 850.0
@@ -43,6 +45,7 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	handle_animations()
 	
+	
 func _input(event: InputEvent) -> void:
 	state_machine.process_input(event)
 	if Input.is_action_pressed("Jump"):
@@ -52,15 +55,17 @@ func _process(delta: float) -> void:
 	state_machine.process_frame(delta)
 	jump_buffer_timer -= delta
 	coyote_timer -= delta
+	print($LeftWall.is_colliding())
+
 
 func apply_gravitiy(delta : float):
-	if not is_on_floor():
+	if not is_on_floor() and not state_machine.current_state is Wall_grab_state :
 		velocity.y += gravity * delta
 	else:
 		can_double_jump = true
 
 func handle_animations():
-	if is_on_floor():
+	if is_on_floor() and not is_on_wall_only():
 		if velocity.x != 0:
 			sprite.play("run")
 		else:
@@ -88,6 +93,12 @@ func add_smoke():
 func has_buffered_jump() -> bool:
 	return jump_buffer_timer > 0
 
+func is_on_left_wall_only() -> bool:
+	return $LeftWall.is_colliding() and not is_on_floor()
+	
+func is_on_right_wall_only() -> bool:
+	return $RightWall.is_colliding() and not is_on_floor()
+	
 func die():
 	queue_free()
 

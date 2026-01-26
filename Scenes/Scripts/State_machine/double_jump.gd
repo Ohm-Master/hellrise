@@ -29,4 +29,5 @@ func process_physics(delta: float) -> State:
 			parent.velocity.x = 0
 	if parent.velocity.y > 0:
 		return fall_state
+		
 	return null

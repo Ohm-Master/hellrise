@@ -6,6 +6,7 @@ class_name Fall_state
 @export var idle_state : State
 @export var double_jump_state : State
 @export var jump_state : State
+@export var wall_grab_state : State
 
 func enter() -> void:
 	parent.velocity.y = 0
@@ -18,7 +19,7 @@ func process_input(_event: InputEvent) -> State:
 
 func process_physics(delta: float) -> State:
 	
-	if last_state is Jump_state or Double_jump_state:
+	if last_state is Jump_state or last_state is Double_jump_state:
 		parent.velocity.y += parent.gravity / 2 * delta
 	
 	if Input.is_action_pressed("Left"):
@@ -44,4 +45,7 @@ func process_physics(delta: float) -> State:
 			return move_state
 		else:
 			return idle_state
+	if parent.is_on_wall_only():
+		return wall_grab_state
+	
 	return null

@@ -12,7 +12,7 @@ var cooldown_timer := 0.0
 
 func _process(delta: float) -> void:
 	look_at(get_global_mouse_position())
-	
+	ray_cast_2d.force_raycast_update()
 	
 	if cooldown_timer <= 0:
 		if !ray_cast_2d.is_colliding():
