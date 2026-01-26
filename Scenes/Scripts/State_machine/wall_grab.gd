@@ -17,8 +17,8 @@ func process_physics(delta: float) -> State:
 			return fall_state
 		else:
 			parent.velocity.y = parent.FRICTION
-	if parent.is_on_left_wall_only():
-		if Input.is_action_pressed("Rght"):
+	if parent.is_on_right_wall_only():
+		if Input.is_action_pressed("Right"):
 			parent.velocity.y = 0
 		elif Input.is_action_pressed("Left"):
 			return fall_state

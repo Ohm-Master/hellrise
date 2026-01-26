@@ -21,7 +21,7 @@ var is_sliding := false
 var jump_buffer_timer := 0.0
 var jump_buffer := 0.1
 
-var coyote_time := 0.2
+var coyote_time := 0.1
 var coyote_timer := 0.0
 
 enum DIR {
@@ -50,12 +50,14 @@ func _input(event: InputEvent) -> void:
 	state_machine.process_input(event)
 	if Input.is_action_pressed("Jump"):
 		jump_buffer_timer = jump_buffer
-	
+#	print(left_wall_top.is_colliding())
+#	print(left_wall_middle.is_colliding())
+#	print(left_wall_bottom.is_colliding())
+
 func _process(delta: float) -> void:
 	state_machine.process_frame(delta)
 	jump_buffer_timer -= delta
 	coyote_timer -= delta
-	print($LeftWall.is_colliding())
 
 
 func apply_gravitiy(delta : float):
@@ -89,15 +91,18 @@ func add_smoke():
 	smoke.position = $Smoke_point.global_position
 	get_tree().current_scene.add_child(smoke)
 	smoke.play()
-
+  
 func has_buffered_jump() -> bool:
 	return jump_buffer_timer > 0
 
 func is_on_left_wall_only() -> bool:
-	return $LeftWall.is_colliding() and not is_on_floor()
-	
+	return $LeftWallTop.is_colliding() and $LeftWallMiddle.is_colliding() and $LeftWallBottom.is_colliding() and not is_on_floor()
+
 func is_on_right_wall_only() -> bool:
-	return $RightWall.is_colliding() and not is_on_floor()
+	return $RightWallTop.is_colliding() and $RightWallMiddle.is_colliding() and $RightWallBottom.is_colliding() and not is_on_floor()
+	
+func is_touching_wall_only() -> bool:
+	return is_on_left_wall_only() or is_on_right_wall_only()
 	
 func die():
 	queue_free()

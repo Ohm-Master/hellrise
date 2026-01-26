@@ -20,8 +20,8 @@ radius = 26.0
 height = 88.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_x3wgy"]
-radius = 25.0
-height = 86.0
+radius = 23.0
+height = 80.0
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 texture_filter = 1
@@ -79,12 +79,23 @@ fall_state = NodePath("../Fall")
 
 [node name="Sprite" parent="." instance=ExtResource("1_v0iea")]
 
+[node name="Health_bar" type="TextureProgressBar" parent="."]
+unique_name_in_owner = true
+self_modulate = Color(0.7647059, 0, 0, 1)
+offset_left = -89.0
+offset_top = -127.0
+offset_right = 86.0
+offset_bottom = 48.0
+max_value = 150.0
+value = 150.0
+fill_mode = 5
+texture_progress = ExtResource("6_x3wgy")
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-1, -21)
 shape = SubResource("CapsuleShape2D_cvnsp")
 
 [node name="HurtBoxComponet" parent="." node_paths=PackedStringArray("Health") groups=["Damageable"] instance=ExtResource("3_vgqql")]
-visible = false
 position = Vector2(-1, -21)
 collision_mask = 0
 Health = NodePath("../HealthComponet")
@@ -103,36 +114,49 @@ position = Vector2(-1, -40)
 position = Vector2(-1, -40)
 
 [node name="Smoke_point" type="Marker2D" parent="."]
-position = Vector2(0, 22)
+position = Vector2(-1, 22)
 
 [node name="Dmg_num" type="Marker2D" parent="."]
 position = Vector2(2, -64)
 
-[node name="RightWall" type="RayCast2D" parent="."]
+[node name="RightWallMiddle" type="RayCast2D" parent="."]
 modulate = Color(0, 0.1333332, 1, 1)
-position = Vector2(28, -57)
-target_position = Vector2(0, 73)
+position = Vector2(-1, -21)
+target_position = Vector2(31, 0)
 collision_mask = 2
 hit_from_inside = true
 
-[node name="LeftWall" type="RayCast2D" parent="."]
+[node name="LeftWallTop" type="RayCast2D" parent="."]
 modulate = Color(0, 0.1333332, 1, 1)
-position = Vector2(-30, -57)
-target_position = Vector2(0, 73)
+position = Vector2(-1, -64)
+target_position = Vector2(-31, 0)
 collision_mask = 2
 hit_from_inside = true
 
-[node name="Health_bar" type="TextureProgressBar" parent="."]
-unique_name_in_owner = true
-visible = false
-self_modulate = Color(0.7647059, 0, 0, 1)
-offset_left = -89.0
-offset_top = -127.0
-offset_right = 86.0
-offset_bottom = 48.0
-max_value = 150.0
-value = 150.0
-fill_mode = 5
-texture_progress = ExtResource("6_x3wgy")
+[node name="RightWallTop" type="RayCast2D" parent="."]
+modulate = Color(0, 0.1333332, 1, 1)
+position = Vector2(-1, -64)
+target_position = Vector2(31, 0)
+collision_mask = 2
+hit_from_inside = true
+
+[node name="LeftWallBottom" type="RayCast2D" parent="."]
+modulate = Color(0, 0.1333332, 1, 1)
+position = Vector2(-1, 22)
+target_position = Vector2(-31, 0)
+collision_mask = 2
+hit_from_inside = true
+
+[node name="RightWallBottom" type="RayCast2D" parent="."]
+modulate = Color(0, 0.1333332, 1, 1)
+position = Vector2(-1, 22)
+target_position = Vector2(31, 0)
+collision_mask = 2
+hit_from_inside = true
+
+[node name="LeftWallMiddle" type="RayCast2D" parent="."]
+position = Vector2(-1, -21)
+target_position = Vector2(-31, 0)
+collision_mask = 2
 
 [connection signal="health_changed" from="HealthComponet" to="." method="_on_health_changed"]

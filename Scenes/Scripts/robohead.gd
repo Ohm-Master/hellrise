@@ -73,7 +73,7 @@ func idle_state(delta : float):
 	
 func chase_state(delta : float):
 	if player:
-		var target_angle = global_position.angle_to_point(player.global_position)
+		var target_angle = global_position.angle_to_point(player.global_position - Vector2(0, 25))
 		rotation = lerp_angle(rotation, target_angle, 8.0 * delta)
 		var direction := global_position.direction_to(player.global_position)
 		velocity = direction * move_speed
@@ -88,7 +88,7 @@ func chase_state(delta : float):
 func shoot_state(delta : float):
 	sprite.play("Attack")
 	if player:
-		var target_angle = global_position.angle_to_point(player.global_position)
+		var target_angle = global_position.angle_to_point(player.global_position - Vector2(0, 25))
 		rotation = lerp_angle(rotation, target_angle, 8.0 * delta)
 	velocity = velocity.move_toward(Vector2.ZERO, move_speed / 2)
 	
@@ -105,7 +105,7 @@ func shoot_state(delta : float):
 
 func back_up_state(delta : float):
 	if player:
-		var target_angle = global_position.angle_to_point(player.global_position)
+		var target_angle = global_position.angle_to_point(player.global_position - Vector2(0, 25))
 		rotation = lerp_angle(rotation, target_angle, 8.0 * delta)
 		var direction := global_position.direction_to(player.global_position)
 		velocity = -direction * move_speed
