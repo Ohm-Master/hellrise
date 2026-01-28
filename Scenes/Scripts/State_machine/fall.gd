@@ -45,7 +45,8 @@ func process_physics(delta: float) -> State:
 			return move_state
 		else:
 			return idle_state
+			
 	if parent.is_touching_wall_only():
 		return wall_grab_state
-	
+			
 	return null

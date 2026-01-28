@@ -7,7 +7,7 @@ const JUMP_SMOKE = preload("uid://ehwk1mq7udbc")
 @onready var state_machine: Node = $State_machine
 @onready var sprite: Node2D = $Sprite
 
-const FRICTION := 350.0
+const FRICTION := 1400.0
 
 var gravity := 1500.0
 var jump_force := -750.0
@@ -29,6 +29,7 @@ enum DIR {
 	RIGHT,
 }
 var direction : DIR
+var wall_jump_direction : DIR
 
 var fade_tween : Tween
 

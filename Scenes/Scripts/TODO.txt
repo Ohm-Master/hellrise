@@ -6,7 +6,7 @@ TODO:
 		✅Add jump buffering.
 		✅Add coyote time.
 		Add health bar with numbers.
-		Make it so that you jump farther when you slide jump.
+		✅Make it so that you jump farther when you slide jump.
 	Guns:
 		✅Add pistol cooldown.
 		Add a Gun comoponent.

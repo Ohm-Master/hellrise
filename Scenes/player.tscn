@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://b5l1ovitylfo2"]
+[gd_scene load_steps=18 format=3 uid="uid://b5l1ovitylfo2"]
 
 [ext_resource type="Script" uid="uid://du44c4274je2s" path="res://Scenes/Scripts/player.gd" id="1_cvnsp"]
 [ext_resource type="PackedScene" uid="uid://bh57son8vxqxh" path="res://Scenes/The_Spy.tscn" id="1_v0iea"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" uid="uid://jkwgd2lasxme" path="res://Scenes/Scripts/State_machine/slide.gd" id="8_ukyrk"]
 [ext_resource type="Script" uid="uid://wuh0w01n11cj" path="res://Scenes/Scripts/State_machine/wall_grab.gd" id="9_7dp3o"]
 [ext_resource type="Script" uid="uid://drnjfiut87vhp" path="res://Scenes/Scripts/State_machine/jump.gd" id="9_gymyn"]
+[ext_resource type="Script" uid="uid://cxdod3knodqk1" path="res://Scenes/Scripts/State_machine/wall_jump.gd" id="10_h4iuc"]
 [ext_resource type="Script" uid="uid://dybi5168rawy4" path="res://Scenes/Scripts/State_machine/fall.gd" id="10_pu2lt"]
 [ext_resource type="Script" uid="uid://cnm3gxnaiwubb" path="res://Scenes/Scripts/State_machine/move.gd" id="11_ukyrk"]
 [ext_resource type="Script" uid="uid://cl27hfoaulft5" path="res://Scenes/Scripts/State_machine/double_jump.gd" id="12_pu2lt"]
@@ -71,11 +72,17 @@ move_state = NodePath("../Move")
 jump_state = NodePath("../Jump")
 double_jump_state = NodePath("../Double_jump")
 
-[node name="Wall_grab" type="Node" parent="State_machine" node_paths=PackedStringArray("idle_state", "jump_state", "fall_state")]
+[node name="Wall_grab" type="Node" parent="State_machine" node_paths=PackedStringArray("idle_state", "wall_jump_state", "fall_state")]
 script = ExtResource("9_7dp3o")
 idle_state = NodePath("../Idle")
-jump_state = NodePath("../Jump")
+wall_jump_state = NodePath("../Wall_jump")
 fall_state = NodePath("../Fall")
+
+[node name="Wall_jump" type="Node" parent="State_machine" node_paths=PackedStringArray("fall_state", "double_jump_state", "wall_grab_state")]
+script = ExtResource("10_h4iuc")
+fall_state = NodePath("../Fall")
+double_jump_state = NodePath("../Double_jump")
+wall_grab_state = NodePath("../Wall_grab")
 
 [node name="Sprite" parent="." instance=ExtResource("1_v0iea")]
 
