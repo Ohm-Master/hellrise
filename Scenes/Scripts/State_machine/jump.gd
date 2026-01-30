@@ -4,6 +4,7 @@ class_name Jump_state
 
 @export var fall_state : State
 @export var double_jump_state : State
+@export var wall_grab_state : State
 
 #var air_time : float = 0.0 (it equals 0.55)
 
@@ -39,4 +40,6 @@ func process_physics(delta: float) -> State:
 	if parent.velocity.y > 0:
 #		print(air_time)
 		return fall_state
+	if parent.is_touching_wall_only():
+		return wall_grab_state
 	return null

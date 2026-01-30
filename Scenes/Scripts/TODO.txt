@@ -1,8 +1,8 @@
 TODO:
 	Player:
 		✅Add crouch/slide.
-		Add wall grab/slide/dash.
-		Add dash.
+		✅Add wall grab/slide/jump.
+		Add dash/wall dash.
 		✅Add jump buffering.
 		✅Add coyote time.
 		Add health bar with numbers.
@@ -29,7 +29,7 @@ TODO:
 		✅Draw 1st boss texture (Guardian of heaven)
 	Bugs:
 		✅Fix player stopping when pressing A and D at the same time.
-		✅Fix bullets sometimes doing double damage.
+		Fix bullets sometimes doing double damage.
 		✅Fix Gun being able to shoot throu walls.
 		✅Fix health bar not fading when hit in quick succession. 
 		✅Fix all floating damage numbers increasing size when final hit.

@@ -3,6 +3,7 @@ extends State
 class_name Double_jump_state
 
 @export var fall_state : State
+@export var wall_grab_state : State
 
 func enter() -> void:
 	parent.velocity.y = jump_force
@@ -29,5 +30,7 @@ func process_physics(delta: float) -> State:
 			parent.velocity.x = 0
 	if parent.velocity.y > 0:
 		return fall_state
+	if parent.is_touching_wall_only():
+		return wall_grab_state
 		
 	return null
