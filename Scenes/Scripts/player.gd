@@ -18,6 +18,13 @@ var air_drag := 500.0
 var can_double_jump := true
 var is_sliding := false
 
+var can_dash := true
+var dash_cooldown := 0.15
+var dash_cooldown_timer := 0.0
+var dash_time := 0.1
+var dash_timer := 0.0
+var dash_speed := 3000
+
 var jump_buffer_timer := 0.0
 var jump_buffer := 0.1
 
@@ -27,9 +34,12 @@ var coyote_timer := 0.0
 enum DIR {
 	LEFT,
 	RIGHT,
+	UP,
+	DOWN,
 }
 var direction : DIR
 var wall_jump_direction : DIR
+var dash_direction : DIR
 
 var fade_tween : Tween
 
@@ -46,26 +56,34 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	handle_animations()
 	
-	
+	if Input.is_action_pressed("Up"):
+		dash_direction = DIR.UP
+	elif Input.is_action_pressed("Down") and not is_on_floor():
+		dash_direction = DIR.DOWN
+	elif Input.is_action_pressed("Right"):
+		dash_direction = DIR.RIGHT
+	elif Input.is_action_pressed("Left"):
+		dash_direction = DIR.LEFT
+	else:
+		dash_direction = direction
+
 func _input(event: InputEvent) -> void:
 	state_machine.process_input(event)
 	if Input.is_action_pressed("Jump"):
 		jump_buffer_timer = jump_buffer
-#	print(left_wall_top.is_colliding())
-#	print(left_wall_middle.is_colliding())
-#	print(left_wall_bottom.is_colliding())
 
 func _process(delta: float) -> void:
 	state_machine.process_frame(delta)
 	jump_buffer_timer -= delta
 	coyote_timer -= delta
 
-
 func apply_gravitiy(delta : float):
-	if not is_on_floor() and not state_machine.current_state is Wall_grab_state :
+	if not is_on_floor() and not state_machine.current_state is Wall_grab_state:
 		velocity.y += gravity * delta
 	else:
 		can_double_jump = true
+		dash_cooldown_timer -= delta
+		can_dash = dash_cooldown_timer <= 0
 
 func handle_animations():
 	if is_on_floor() and not is_on_wall_only():

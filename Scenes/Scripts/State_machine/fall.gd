@@ -18,9 +18,7 @@ func process_input(_event: InputEvent) -> State:
 
 
 func process_physics(delta: float) -> State:
-	
-	if last_state is Jump_state or last_state is Double_jump_state:
-		parent.velocity.y += parent.gravity / 2 * delta
+	parent.velocity.y += parent.gravity / 2 * delta
 	
 	if Input.is_action_pressed("Left"):
 		parent.velocity.x = -parent.air_speed

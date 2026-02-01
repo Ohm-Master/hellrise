@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://b5l1ovitylfo2"]
+[gd_scene load_steps=19 format=3 uid="uid://b5l1ovitylfo2"]
 
 [ext_resource type="Script" uid="uid://du44c4274je2s" path="res://Scenes/Scripts/player.gd" id="1_cvnsp"]
 [ext_resource type="PackedScene" uid="uid://bh57son8vxqxh" path="res://Scenes/The_Spy.tscn" id="1_v0iea"]
@@ -13,6 +13,7 @@
 [ext_resource type="Script" uid="uid://drnjfiut87vhp" path="res://Scenes/Scripts/State_machine/jump.gd" id="9_gymyn"]
 [ext_resource type="Script" uid="uid://cxdod3knodqk1" path="res://Scenes/Scripts/State_machine/wall_jump.gd" id="10_h4iuc"]
 [ext_resource type="Script" uid="uid://dybi5168rawy4" path="res://Scenes/Scripts/State_machine/fall.gd" id="10_pu2lt"]
+[ext_resource type="Script" uid="uid://bwehkokxmdk7w" path="res://Scenes/Scripts/State_machine/dash.gd" id="11_fd4e3"]
 [ext_resource type="Script" uid="uid://cnm3gxnaiwubb" path="res://Scenes/Scripts/State_machine/move.gd" id="11_ukyrk"]
 [ext_resource type="Script" uid="uid://cl27hfoaulft5" path="res://Scenes/Scripts/State_machine/double_jump.gd" id="12_pu2lt"]
 
@@ -33,12 +34,13 @@ script = ExtResource("1_cvnsp")
 script = ExtResource("7_3smsa")
 starting_state = NodePath("Idle")
 
-[node name="Idle" type="Node" parent="State_machine" node_paths=PackedStringArray("fall_state", "move_state", "jump_state", "slide_state")]
+[node name="Idle" type="Node" parent="State_machine" node_paths=PackedStringArray("fall_state", "move_state", "jump_state", "slide_state", "dash_state")]
 script = ExtResource("8_8erm5")
 fall_state = NodePath("../Fall")
 move_state = NodePath("../Move")
 jump_state = NodePath("../Jump")
 slide_state = NodePath("../Slide")
+dash_state = NodePath("../Dash")
 
 [node name="Jump" type="Node" parent="State_machine" node_paths=PackedStringArray("fall_state", "double_jump_state", "wall_grab_state")]
 script = ExtResource("9_gymyn")
@@ -58,6 +60,10 @@ wall_grab_state = NodePath("../Wall_grab")
 script = ExtResource("12_pu2lt")
 fall_state = NodePath("../Fall")
 wall_grab_state = NodePath("../Wall_grab")
+
+[node name="Dash" type="Node" parent="State_machine" node_paths=PackedStringArray("idle_state")]
+script = ExtResource("11_fd4e3")
+idle_state = NodePath("../Idle")
 
 [node name="Move" type="Node" parent="State_machine" node_paths=PackedStringArray("fall_state", "idle_state", "jump_state", "slide_state")]
 script = ExtResource("11_ukyrk")
