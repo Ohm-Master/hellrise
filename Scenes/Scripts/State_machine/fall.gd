@@ -7,18 +7,20 @@ class_name Fall_state
 @export var double_jump_state : State
 @export var jump_state : State
 @export var wall_grab_state : State
+@export var dash_state : State
 
 func enter() -> void:
 	parent.velocity.y = 0
 
 func process_input(_event: InputEvent) -> State:
+	if Input.is_action_just_pressed("Dash") and parent.can_dash:
+		return dash_state
 	if Input.is_action_just_pressed("Jump") and parent.can_double_jump:
 		return double_jump_state
 	return null
 
-
 func process_physics(delta: float) -> State:
-	parent.velocity.y += parent.gravity / 2 * delta
+	parent.velocity.y += parent.gravity / 1.2 * delta
 	
 	if Input.is_action_pressed("Left"):
 		parent.velocity.x = -parent.air_speed

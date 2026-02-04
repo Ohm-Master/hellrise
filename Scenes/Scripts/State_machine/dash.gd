@@ -13,7 +13,7 @@ func process_physics(delta: float) -> State:
 	
 	match parent.dash_direction:
 		parent.DIR.UP:
-			parent.velocity.y = move_toward(parent.velocity.y, -parent.dash_speed,  90000 * delta)
+			parent.velocity.y = move_toward(parent.velocity.y, -parent.dash_speed,  60000 * delta)
 		parent.DIR.DOWN:
 			parent.velocity.y = move_toward(parent.velocity.y, parent.dash_speed, 90000 * delta)
 		parent.DIR.RIGHT:

@@ -5,6 +5,7 @@ class_name Jump_state
 @export var fall_state : State
 @export var double_jump_state : State
 @export var wall_grab_state : State
+@export var dash_state : State
 
 #var air_time : float = 0.0 (it equals 0.55)
 
@@ -13,6 +14,8 @@ func enter() -> void:
 #	air_time = 0.0
 
 func process_input(_event: InputEvent) -> State:
+	if Input.is_action_just_pressed("Dash") and parent.can_dash:
+			return dash_state
 	if Input.is_action_just_pressed("Jump") and parent.can_double_jump:
 		return double_jump_state
 	return null

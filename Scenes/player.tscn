@@ -42,35 +42,39 @@ jump_state = NodePath("../Jump")
 slide_state = NodePath("../Slide")
 dash_state = NodePath("../Dash")
 
-[node name="Jump" type="Node" parent="State_machine" node_paths=PackedStringArray("fall_state", "double_jump_state", "wall_grab_state")]
+[node name="Jump" type="Node" parent="State_machine" node_paths=PackedStringArray("fall_state", "double_jump_state", "wall_grab_state", "dash_state")]
 script = ExtResource("9_gymyn")
 fall_state = NodePath("../Fall")
 double_jump_state = NodePath("../Double_jump")
 wall_grab_state = NodePath("../Wall_grab")
+dash_state = NodePath("../Dash")
 
-[node name="Fall" type="Node" parent="State_machine" node_paths=PackedStringArray("move_state", "idle_state", "double_jump_state", "jump_state", "wall_grab_state")]
+[node name="Fall" type="Node" parent="State_machine" node_paths=PackedStringArray("move_state", "idle_state", "double_jump_state", "jump_state", "wall_grab_state", "dash_state")]
 script = ExtResource("10_pu2lt")
 move_state = NodePath("../Move")
 idle_state = NodePath("../Idle")
 double_jump_state = NodePath("../Double_jump")
 jump_state = NodePath(".")
 wall_grab_state = NodePath("../Wall_grab")
+dash_state = NodePath("../Dash")
 
-[node name="Double_jump" type="Node" parent="State_machine" node_paths=PackedStringArray("fall_state", "wall_grab_state")]
+[node name="Double_jump" type="Node" parent="State_machine" node_paths=PackedStringArray("fall_state", "wall_grab_state", "dash_state")]
 script = ExtResource("12_pu2lt")
 fall_state = NodePath("../Fall")
 wall_grab_state = NodePath("../Wall_grab")
+dash_state = NodePath("../Dash")
 
 [node name="Dash" type="Node" parent="State_machine" node_paths=PackedStringArray("idle_state")]
 script = ExtResource("11_fd4e3")
 idle_state = NodePath("../Idle")
 
-[node name="Move" type="Node" parent="State_machine" node_paths=PackedStringArray("fall_state", "idle_state", "jump_state", "slide_state")]
+[node name="Move" type="Node" parent="State_machine" node_paths=PackedStringArray("fall_state", "idle_state", "jump_state", "slide_state", "dash_state")]
 script = ExtResource("11_ukyrk")
 fall_state = NodePath("../Fall")
 idle_state = NodePath("../Idle")
 jump_state = NodePath("../Jump")
 slide_state = NodePath("../Slide")
+dash_state = NodePath("../Dash")
 
 [node name="Slide" type="Node" parent="State_machine" node_paths=PackedStringArray("fall_state", "idle_state", "move_state", "jump_state", "double_jump_state")]
 script = ExtResource("8_ukyrk")

@@ -4,6 +4,7 @@ class_name Double_jump_state
 
 @export var fall_state : State
 @export var wall_grab_state : State
+@export var dash_state : State
 
 func enter() -> void:
 	parent.velocity.y = jump_force
@@ -33,4 +34,9 @@ func process_physics(delta: float) -> State:
 	if parent.is_touching_wall_only():
 		return wall_grab_state
 		
+	return null
+
+func process_input(event: InputEvent) -> State:
+	if Input.is_action_just_pressed("Dash") and parent.can_dash:
+		return dash_state
 	return null

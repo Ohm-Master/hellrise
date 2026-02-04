@@ -2,10 +2,12 @@ TODO:
 	Player:
 		✅Add crouch/slide.
 		✅Add wall grab/slide/jump.
-		Add dash/wall dash.
+		✅Add dash.
+		Add wall dash.
 		✅Add jump buffering.
 		✅Add coyote time.
 		Add health bar with numbers.
+		Make it so that the player's hurtbox gets smaller during slide.
 		✅Make it so that you jump farther when you slide jump.
 	Guns:
 		✅Add pistol cooldown.
@@ -19,7 +21,7 @@ TODO:
 		✅Make it so enemies do less damage when hit other enemies.
 	Animations:
 		Add animation queuing for sprite
-		Make dash anim
+		Make dash anim and vfx
 		Make slide anim
 		Make wall grab anim
 	Art:

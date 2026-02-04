@@ -121,7 +121,7 @@ func is_on_right_wall_only() -> bool:
 	return $RightWallTop.is_colliding() and $RightWallMiddle.is_colliding() and $RightWallBottom.is_colliding() and not is_on_floor()
 	
 func is_touching_wall_only() -> bool:
-	return is_on_left_wall_only() or is_on_right_wall_only()
+	return (is_on_left_wall_only() or is_on_right_wall_only()) and not is_on_ceiling()
 	
 func die():
 	queue_free()
