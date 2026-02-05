@@ -24,6 +24,7 @@ var dash_cooldown_timer := 0.0
 var dash_time := 0.1
 var dash_timer := 0.0
 var dash_speed := 3000
+var dashing := false
 
 var jump_buffer_timer := 0.0
 var jump_buffer := 0.1
@@ -56,16 +57,23 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	handle_animations()
 	
-	if Input.is_action_pressed("Up"):
-		dash_direction = DIR.UP
-	elif Input.is_action_pressed("Down") and not is_on_floor():
-		dash_direction = DIR.DOWN
-	elif Input.is_action_pressed("Right"):
-		dash_direction = DIR.RIGHT
-	elif Input.is_action_pressed("Left"):
-		dash_direction = DIR.LEFT
-	else:
-		dash_direction = direction
+	if not dashing:
+		if Input.is_action_pressed("Up"):
+			dash_direction = DIR.UP
+		elif Input.is_action_pressed("Down") and not is_on_floor():
+			dash_direction = DIR.DOWN
+		elif Input.is_action_pressed("Right"):
+			if not is_touching_wall_only():
+				dash_direction = DIR.RIGHT
+			else:
+				dash_direction = DIR.LEFT
+		elif Input.is_action_pressed("Left"):
+			if not is_touching_wall_only():
+				dash_direction = DIR.LEFT
+			else:
+				dash_direction = DIR.RIGHT
+		else:
+			dash_direction = direction
 
 func _input(event: InputEvent) -> void:
 	state_machine.process_input(event)

@@ -23,7 +23,6 @@ func enter() -> void:
 func process_physics(delta: float) -> State:
 	move_timer -= delta
 	can_move = move_timer <= 0
-	print(can_move, move_timer)
 	if can_move:
 		if Input.is_action_pressed("Left"):
 			parent.velocity.x = -parent.air_speed

@@ -5,13 +5,17 @@ class_name Wall_grab_state
 @export var idle_state : State
 @export var wall_jump_state : State
 @export var fall_state : State
+@export var dash_state : State
 
 func process_physics(delta: float) -> State:
 	if parent.is_on_left_wall_only():
 		
-		if Input.is_action_just_pressed("Jump"):
+		if Input.is_action_pressed("Jump"):
 			parent.wall_jump_direction = parent.DIR.RIGHT
 			return wall_jump_state
+		
+		if Input.is_action_just_pressed("Dash"):
+			return dash_state
 		
 		elif Input.is_action_pressed("Left"):
 			parent.velocity.y = 0	
@@ -24,7 +28,7 @@ func process_physics(delta: float) -> State:
 
 	if parent.is_on_right_wall_only():
 		
-		if Input.is_action_just_pressed("Jump"):
+		if Input.is_action_pressed("Jump"):
 			parent.wall_jump_direction = parent.DIR.LEFT
 			return wall_jump_state
 		

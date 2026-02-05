@@ -84,11 +84,12 @@ move_state = NodePath("../Move")
 jump_state = NodePath("../Jump")
 double_jump_state = NodePath("../Double_jump")
 
-[node name="Wall_grab" type="Node" parent="State_machine" node_paths=PackedStringArray("idle_state", "wall_jump_state", "fall_state")]
+[node name="Wall_grab" type="Node" parent="State_machine" node_paths=PackedStringArray("idle_state", "wall_jump_state", "fall_state", "dash_state")]
 script = ExtResource("9_7dp3o")
 idle_state = NodePath("../Idle")
 wall_jump_state = NodePath("../Wall_jump")
 fall_state = NodePath("../Fall")
+dash_state = NodePath("../Dash")
 
 [node name="Wall_jump" type="Node" parent="State_machine" node_paths=PackedStringArray("fall_state", "double_jump_state", "wall_grab_state")]
 script = ExtResource("10_h4iuc")

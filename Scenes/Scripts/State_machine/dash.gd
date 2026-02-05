@@ -8,6 +8,7 @@ func enter() -> void:
 	parent.dash_cooldown_timer = parent.dash_cooldown
 	parent.dash_timer = parent.dash_time
 	parent.can_dash = false
+	parent.dashing = true
 	
 func process_physics(delta: float) -> State:
 	
@@ -26,3 +27,6 @@ func process_physics(delta: float) -> State:
 	if parent.dash_timer <= 0:
 		return idle_state
 	return null
+
+func exit() -> void:
+	parent.dashing = false
