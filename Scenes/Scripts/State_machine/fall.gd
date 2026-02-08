@@ -25,7 +25,7 @@ func process_physics(delta: float) -> State:
 	parent.velocity.y += (parent.gravity / gravity_multiplier) * delta
 	
 	gravity_multiplier -=  0.02
-	gravity_multiplier = clamp(gravity_multiplier, 0.8, 1.2)
+	gravity_multiplier = clamp(gravity_multiplier, 0.8, 1.5)
 	
 	if Input.is_action_pressed("Left"):
 		parent.velocity.x = -parent.air_speed

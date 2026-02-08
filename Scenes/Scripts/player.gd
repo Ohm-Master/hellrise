@@ -19,7 +19,10 @@ var can_double_jump := true
 var is_sliding := false
 
 var can_dash := true
-var dash_cooldown := 0.15
+var air_dashes := 3
+var air_dash_cooldown := 1.0
+var air_dash_cooldown_timer := 0.0 
+var dash_cooldown := 0.18
 var dash_cooldown_timer := 0.0
 var dash_time := 0.13
 var dash_timer := 0.0
@@ -68,14 +71,20 @@ func _process(delta: float) -> void:
 	state_machine.process_frame(delta)
 	jump_buffer_timer -= delta
 	coyote_timer -= delta
+	dash_cooldown_timer -= delta
+	can_dash = dash_cooldown_timer <= 0
+	air_dash_cooldown_timer -= delta
+	
+#	if not air_dashes == 3:
+#		if air_dash_cooldown_timer <= 0:
+#			air_dashes += 1
+#		clamp(air_dashes, 0, 3)
 
 func apply_gravitiy(delta : float):
 	if not is_on_floor() and not state_machine.current_state is Wall_grab_state:
 		velocity.y += gravity * delta
 	else:
 		can_double_jump = true
-		dash_cooldown_timer -= delta
-		can_dash = dash_cooldown_timer <= 0
 
 func handle_animations():
 	if is_on_floor() and not is_on_wall_only():
@@ -114,6 +123,9 @@ func is_on_right_wall_only() -> bool:
 	
 func is_touching_wall_only() -> bool:
 	return (is_on_left_wall_only() or is_on_right_wall_only()) and not is_on_ceiling()
+	
+func can_air_dash() -> bool:
+	return not air_dashes <= 0
 	
 func handle_dash_direction() -> DIR:
 	if dashing:

@@ -7,28 +7,53 @@ class_name Dash
 @export var move_state : State
 @export var slide_state : State
 
+var is_good_dash := true
+
 func enter() -> void:
-	parent.dash_cooldown_timer = parent.dash_cooldown
 	parent.dash_timer = parent.dash_time
 	parent.can_dash = false
 	parent.dashing = true
 	
-func process_physics(delta: float) -> State:
-	
 	match parent.dash_direction:
 		parent.DIR.UP:
-			parent.velocity.y = move_toward(parent.velocity.y, -parent.dash_speed,  180000 * delta)
+			if parent.can_air_dash():
+				parent.air_dashes -= 1
+				parent.velocity.y = -parent.dash_speed
+			else:
+				is_good_dash = false
 		parent.DIR.DOWN:
-			parent.velocity.y = move_toward(parent.velocity.y, parent.dash_speed, 180000 * delta)
+			if parent.can_air_dash():
+				parent.air_dashes -= 1
+				parent.velocity.y = parent.dash_speed
+			else:
+				is_good_dash = false
 		parent.DIR.RIGHT:
-			parent.velocity.x = move_toward(parent.velocity.x, parent.dash_speed, 180000 * delta)
+			if parent.is_on_floor():
+				parent.velocity.x = parent.dash_speed
+			else:
+				if parent.can_air_dash():
+					parent.velocity.x = parent.dash_speed
+					parent.air_dashes -= 1
+				else:
+					is_good_dash = false
 		parent.DIR.LEFT:
-			parent.velocity.x = move_toward(parent.velocity.x, -parent.dash_speed, 180000 * delta)
+			if parent.is_on_floor():
+				parent.velocity.x = -parent.dash_speed
+			else:
+				if parent.can_air_dash():
+					parent.velocity.x = -parent.dash_speed
+					parent.air_dashes -= 1
+				else:
+					is_good_dash = false
+
+	parent.dash_cooldown_timer = parent.dash_cooldown
+
+func process_physics(delta: float) -> State:
+	if parent.dash_timer <= 0 or not is_good_dash:
+		return calculate_end_state()
 	
 	parent.dash_timer -= delta
 	
-	if parent.dash_timer <= 0:
-		return calculate_end_state()
 	return null
 
 func calculate_end_state() -> State:
@@ -45,3 +70,4 @@ func calculate_end_state() -> State:
 
 func exit() -> void:
 	parent.dashing = false
+	is_good_dash = true

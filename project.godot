@@ -26,6 +26,7 @@ gdscript/warnings/integer_division=0
 
 window/size/viewport_width=1600
 window/size/viewport_height=900
+window/size/mode=2
 window/size/borderless=true
 mouse_cursor/custom_image="uid://3w050knf1ep0"
 
