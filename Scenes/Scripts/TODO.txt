@@ -3,7 +3,7 @@ TODO:
 		✅Add crouch/slide.
 		✅Add wall grab/slide/jump.
 		✅Add dash.
-		Add wall dash.
+		✅Add wall dash.
 		✅Add jump buffering.
 		✅Add coyote time.
 		Add health bar with numbers.

@@ -64,9 +64,12 @@ fall_state = NodePath("../Fall")
 wall_grab_state = NodePath("../Wall_grab")
 dash_state = NodePath("../Dash")
 
-[node name="Dash" type="Node" parent="State_machine" node_paths=PackedStringArray("idle_state")]
+[node name="Dash" type="Node" parent="State_machine" node_paths=PackedStringArray("fall_state", "idle_state", "move_state", "slide_state")]
 script = ExtResource("11_fd4e3")
+fall_state = NodePath("../Fall")
 idle_state = NodePath("../Idle")
+move_state = NodePath("../Move")
+slide_state = NodePath("../Slide")
 
 [node name="Move" type="Node" parent="State_machine" node_paths=PackedStringArray("fall_state", "idle_state", "jump_state", "slide_state", "dash_state")]
 script = ExtResource("11_ukyrk")

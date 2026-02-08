@@ -21,9 +21,9 @@ var is_sliding := false
 var can_dash := true
 var dash_cooldown := 0.15
 var dash_cooldown_timer := 0.0
-var dash_time := 0.1
+var dash_time := 0.13
 var dash_timer := 0.0
-var dash_speed := 3000
+var dash_speed := 3250
 var dashing := false
 
 var jump_buffer_timer := 0.0
@@ -56,24 +56,8 @@ func _physics_process(delta: float) -> void:
 	apply_gravitiy(delta)
 	move_and_slide()
 	handle_animations()
-	
-	if not dashing:
-		if Input.is_action_pressed("Up"):
-			dash_direction = DIR.UP
-		elif Input.is_action_pressed("Down") and not is_on_floor():
-			dash_direction = DIR.DOWN
-		elif Input.is_action_pressed("Right"):
-			if not is_touching_wall_only():
-				dash_direction = DIR.RIGHT
-			else:
-				dash_direction = DIR.LEFT
-		elif Input.is_action_pressed("Left"):
-			if not is_touching_wall_only():
-				dash_direction = DIR.LEFT
-			else:
-				dash_direction = DIR.RIGHT
-		else:
-			dash_direction = direction
+	dash_direction = handle_dash_direction()
+
 
 func _input(event: InputEvent) -> void:
 	state_machine.process_input(event)
@@ -130,6 +114,27 @@ func is_on_right_wall_only() -> bool:
 	
 func is_touching_wall_only() -> bool:
 	return (is_on_left_wall_only() or is_on_right_wall_only()) and not is_on_ceiling()
+	
+func handle_dash_direction() -> DIR:
+	if dashing:
+		return dash_direction
+		
+	if Input.is_action_pressed("Up"):
+		return DIR.UP
+	elif Input.is_action_pressed("Down") and not is_on_floor():
+		return DIR.DOWN
+	elif Input.is_action_pressed("Right"):
+		if not is_touching_wall_only():
+			return DIR.RIGHT
+		else:
+			return DIR.LEFT
+	elif Input.is_action_pressed("Left"):
+		if not is_touching_wall_only():
+			return DIR.LEFT
+		else:
+			return DIR.RIGHT
+	else:
+		return direction
 	
 func die():
 	queue_free()

@@ -9,6 +9,8 @@ class_name Fall_state
 @export var wall_grab_state : State
 @export var dash_state : State
 
+var gravity_multiplier = 1.2
+
 func enter() -> void:
 	parent.velocity.y = 0
 
@@ -20,7 +22,10 @@ func process_input(_event: InputEvent) -> State:
 	return null
 
 func process_physics(delta: float) -> State:
-	parent.velocity.y += parent.gravity / 1.2 * delta
+	parent.velocity.y += (parent.gravity / gravity_multiplier) * delta
+	
+	gravity_multiplier -=  0.02
+	gravity_multiplier = clamp(gravity_multiplier, 0.8, 1.2)
 	
 	if Input.is_action_pressed("Left"):
 		parent.velocity.x = -parent.air_speed
