@@ -5,6 +5,7 @@ TODO:
 		✅Add dash.
 		✅Add wall dash.
 		Add air dash limit.
+		Add 8-way dashing.
 		✅Add jump buffering.
 		✅Add coyote time.
 		Add health bar with numbers.

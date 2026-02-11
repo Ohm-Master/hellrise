@@ -54,6 +54,9 @@ func process_physics(delta: float) -> State:
 	
 	parent.dash_timer -= delta
 	
+	if parent.dash_direction == parent.DIR.UP:
+		parent.velocity.y = move_toward(parent.velocity.y, -1000, 15000 * delta)
+	
 	return null
 
 func calculate_end_state() -> State:

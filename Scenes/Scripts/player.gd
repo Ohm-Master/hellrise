@@ -11,17 +11,16 @@ const FRICTION := 1400.0
 
 var gravity := 1500.0
 var jump_force := -750.0
-var move_speed := 850.0
-var slide_speed := 1200.0
+var move_speed := 950.0
+var slide_speed := 1300.0
 var air_speed := 850.0
 var air_drag := 500.0
 var can_double_jump := true
 var is_sliding := false
 
 var can_dash := true
-var air_dashes := 3
-var air_dash_cooldown := 1.0
-var air_dash_cooldown_timer := 0.0 
+var air_dashes := 3.0
+var max_air_dashes := 3
 var dash_cooldown := 0.18
 var dash_cooldown_timer := 0.0
 var dash_time := 0.13
@@ -60,6 +59,7 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	handle_animations()
 	dash_direction = handle_dash_direction()
+	print(air_dashes)
 
 
 func _input(event: InputEvent) -> void:
@@ -72,13 +72,10 @@ func _process(delta: float) -> void:
 	jump_buffer_timer -= delta
 	coyote_timer -= delta
 	dash_cooldown_timer -= delta
-	can_dash = dash_cooldown_timer <= 0
-	air_dash_cooldown_timer -= delta
 	
-#	if not air_dashes == 3:
-#		if air_dash_cooldown_timer <= 0:
-#			air_dashes += 1
-#		clamp(air_dashes, 0, 3)
+	can_dash = dash_cooldown_timer <= 0
+	air_dashes += delta * 0.5714
+	air_dashes = clampf(air_dashes, 0, max_air_dashes)
 
 func apply_gravitiy(delta : float):
 	if not is_on_floor() and not state_machine.current_state is Wall_grab_state:
@@ -125,7 +122,7 @@ func is_touching_wall_only() -> bool:
 	return (is_on_left_wall_only() or is_on_right_wall_only()) and not is_on_ceiling()
 	
 func can_air_dash() -> bool:
-	return not air_dashes <= 0
+	return not floor(air_dashes) <= 0
 	
 func handle_dash_direction() -> DIR:
 	if dashing:

@@ -13,7 +13,7 @@ func process_input(_event: InputEvent) -> State:
 		return dash_state
 	if Input.is_action_pressed("Jump"):
 		return jump_state
-	if Input.is_action_just_pressed("Slide"):
+	if Input.is_action_pressed("Slide"):
 		return slide_state
 	return null
 
