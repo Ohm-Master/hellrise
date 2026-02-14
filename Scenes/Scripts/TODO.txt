@@ -4,7 +4,8 @@ TODO:
 		✅Add wall grab/slide/jump.
 		✅Add dash.
 		✅Add wall dash.
-		Add air dash limit.
+		✅Add air dash limit.
+		Add air dash cooldown bar.
 		Add 8-way dashing.
 		✅Add jump buffering.
 		✅Add coyote time.

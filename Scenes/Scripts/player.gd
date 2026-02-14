@@ -35,14 +35,20 @@ var coyote_time := 0.1
 var coyote_timer := 0.0
 
 enum DIR {
-	LEFT,
-	RIGHT,
-	UP,
-	DOWN,
+	RIGHT, #0
+	LEFT, #1
+	UP, #2
+	DOWN, #3
+	UP_LEFT, #4
+	UP_RIGHT, #5
+	DOWN_LEFT, #6
+	DOWN_RIGHT, #7
 }
+
 var direction : DIR
 var wall_jump_direction : DIR
 var dash_direction : DIR
+
 
 var fade_tween : Tween
 
@@ -59,8 +65,6 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	handle_animations()
 	dash_direction = handle_dash_direction()
-	print(air_dashes)
-
 
 func _input(event: InputEvent) -> void:
 	state_machine.process_input(event)
@@ -128,22 +132,51 @@ func handle_dash_direction() -> DIR:
 	if dashing:
 		return dash_direction
 		
-	if Input.is_action_pressed("Up"):
-		return DIR.UP
-	elif Input.is_action_pressed("Down") and not is_on_floor():
-		return DIR.DOWN
-	elif Input.is_action_pressed("Right"):
-		if not is_touching_wall_only():
-			return DIR.RIGHT
+	var horizontal := Input.get_axis("Left","Right")
+	var vertical := Input.get_axis("Up", "Down")
+	
+	if is_on_floor():
+		if vertical > 0:
+			vertical = 0
+	
+	if is_touching_wall_only():
+		horizontal *= -1
+	
+	if not horizontal == 0 and not vertical == 0:
+		if vertical < 0:
+			if horizontal >= 1:
+				return DIR.UP_RIGHT
+			else:
+				return DIR.UP_LEFT
 		else:
-			return DIR.LEFT
-	elif Input.is_action_pressed("Left"):
-		if not is_touching_wall_only():
-			return DIR.LEFT
-		else:
-			return DIR.RIGHT
+			if horizontal >= 1:
+				return DIR.DOWN_RIGHT
+			else:
+				return DIR.DOWN_LEFT
 	else:
-		return direction
+		if vertical < 0:
+			return DIR.UP
+		elif vertical > 0:
+			return DIR.DOWN
+		elif horizontal > 0:
+			return DIR.RIGHT
+		elif horizontal < 0:
+			return DIR.LEFT
+	
+	return direction
+	
+func dash_direction_to_Vector2() -> Vector2:
+	var dir = Vector2.ZERO
+	match dash_direction:
+		DIR.UP: dir = Vector2.UP
+		DIR.DOWN: dir = Vector2.DOWN
+		DIR.LEFT: dir = Vector2.LEFT
+		DIR.RIGHT: dir = Vector2.RIGHT
+		DIR.UP_LEFT: dir = Vector2(-1, -1)
+		DIR.UP_RIGHT: dir = Vector2(1, -1)
+		DIR.DOWN_LEFT: dir = Vector2(-1, 1)
+		DIR.DOWN_RIGHT: dir = Vector2(1, 1)
+	return dir
 	
 func die():
 	queue_free()

@@ -10,42 +10,27 @@ class_name Dash
 var is_good_dash := true
 
 func enter() -> void:
+	parent.dashing = true
 	parent.dash_timer = parent.dash_time
 	parent.can_dash = false
-	parent.dashing = true
 	
-	match parent.dash_direction:
-		parent.DIR.UP:
+	print(parent.dash_direction)
+	if parent.dash_direction == parent.DIR.RIGHT or parent.dash_direction == parent.DIR.LEFT:
+		if parent.is_on_floor():
+			parent.velocity = parent.dash_direction_to_Vector2() * parent.dash_speed
+		else:
 			if parent.can_air_dash():
+				parent.velocity = parent.dash_direction_to_Vector2() * parent.dash_speed
 				parent.air_dashes -= 1
-				parent.velocity.y = -parent.dash_speed
 			else:
 				is_good_dash = false
-		parent.DIR.DOWN:
-			if parent.can_air_dash():
+	else:
+		if parent.can_air_dash():
 				parent.air_dashes -= 1
-				parent.velocity.y = parent.dash_speed
-			else:
-				is_good_dash = false
-		parent.DIR.RIGHT:
-			if parent.is_on_floor():
-				parent.velocity.x = parent.dash_speed
-			else:
-				if parent.can_air_dash():
-					parent.velocity.x = parent.dash_speed
-					parent.air_dashes -= 1
-				else:
-					is_good_dash = false
-		parent.DIR.LEFT:
-			if parent.is_on_floor():
-				parent.velocity.x = -parent.dash_speed
-			else:
-				if parent.can_air_dash():
-					parent.velocity.x = -parent.dash_speed
-					parent.air_dashes -= 1
-				else:
-					is_good_dash = false
-
+				parent.velocity = parent.dash_direction_to_Vector2() * parent.dash_speed
+		else:
+			is_good_dash = false
+	
 	parent.dash_cooldown_timer = parent.dash_cooldown
 
 func process_physics(delta: float) -> State:
@@ -54,7 +39,7 @@ func process_physics(delta: float) -> State:
 	
 	parent.dash_timer -= delta
 	
-	if parent.dash_direction == parent.DIR.UP:
+	if not parent.dash_direction == parent.DIR.LEFT or parent.dash_direction == parent.DIR.RIGHT:
 		parent.velocity.y = move_toward(parent.velocity.y, -1000, 15000 * delta)
 	
 	return null

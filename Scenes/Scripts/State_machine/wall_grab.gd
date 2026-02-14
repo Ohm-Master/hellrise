@@ -32,9 +32,11 @@ func process_physics(delta: float) -> State:
 			parent.wall_jump_direction = parent.DIR.LEFT
 			return wall_jump_state
 		
+		if Input.is_action_just_pressed("Dash"):
+			return dash_state
+		
 		elif Input.is_action_pressed("Right"):
 			parent.velocity.y = 0
-			
 			
 		elif Input.is_action_pressed("Left"):
 			return fall_state
