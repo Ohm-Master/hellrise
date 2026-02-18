@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://b5l1ovitylfo2"]
+[gd_scene format=3 uid="uid://b5l1ovitylfo2"]
 
 [ext_resource type="Script" uid="uid://du44c4274je2s" path="res://Scenes/Scripts/player.gd" id="1_cvnsp"]
 [ext_resource type="PackedScene" uid="uid://bh57son8vxqxh" path="res://Scenes/The_Spy.tscn" id="1_v0iea"]
@@ -25,16 +25,16 @@ height = 88.0
 radius = 23.0
 height = 80.0
 
-[node name="Player" type="CharacterBody2D" groups=["Player"]]
+[node name="Player" type="CharacterBody2D" unique_id=854270287 groups=["Player"]]
 texture_filter = 1
 collision_mask = 6
 script = ExtResource("1_cvnsp")
 
-[node name="State_machine" type="Node" parent="." node_paths=PackedStringArray("starting_state")]
+[node name="State_machine" type="Node" parent="." unique_id=614136622 node_paths=PackedStringArray("starting_state")]
 script = ExtResource("7_3smsa")
 starting_state = NodePath("Idle")
 
-[node name="Idle" type="Node" parent="State_machine" node_paths=PackedStringArray("fall_state", "move_state", "jump_state", "slide_state", "dash_state")]
+[node name="Idle" type="Node" parent="State_machine" unique_id=2107121356 node_paths=PackedStringArray("fall_state", "move_state", "jump_state", "slide_state", "dash_state")]
 script = ExtResource("8_8erm5")
 fall_state = NodePath("../Fall")
 move_state = NodePath("../Move")
@@ -42,14 +42,14 @@ jump_state = NodePath("../Jump")
 slide_state = NodePath("../Slide")
 dash_state = NodePath("../Dash")
 
-[node name="Jump" type="Node" parent="State_machine" node_paths=PackedStringArray("fall_state", "double_jump_state", "wall_grab_state", "dash_state")]
+[node name="Jump" type="Node" parent="State_machine" unique_id=560730299 node_paths=PackedStringArray("fall_state", "double_jump_state", "wall_grab_state", "dash_state")]
 script = ExtResource("9_gymyn")
 fall_state = NodePath("../Fall")
 double_jump_state = NodePath("../Double_jump")
 wall_grab_state = NodePath("../Wall_grab")
 dash_state = NodePath("../Dash")
 
-[node name="Fall" type="Node" parent="State_machine" node_paths=PackedStringArray("move_state", "idle_state", "double_jump_state", "jump_state", "wall_grab_state", "dash_state")]
+[node name="Fall" type="Node" parent="State_machine" unique_id=1782358990 node_paths=PackedStringArray("move_state", "idle_state", "double_jump_state", "jump_state", "wall_grab_state", "dash_state")]
 script = ExtResource("10_pu2lt")
 move_state = NodePath("../Move")
 idle_state = NodePath("../Idle")
@@ -58,20 +58,20 @@ jump_state = NodePath(".")
 wall_grab_state = NodePath("../Wall_grab")
 dash_state = NodePath("../Dash")
 
-[node name="Double_jump" type="Node" parent="State_machine" node_paths=PackedStringArray("fall_state", "wall_grab_state", "dash_state")]
+[node name="Double_jump" type="Node" parent="State_machine" unique_id=1984119555 node_paths=PackedStringArray("fall_state", "wall_grab_state", "dash_state")]
 script = ExtResource("12_pu2lt")
 fall_state = NodePath("../Fall")
 wall_grab_state = NodePath("../Wall_grab")
 dash_state = NodePath("../Dash")
 
-[node name="Dash" type="Node" parent="State_machine" node_paths=PackedStringArray("fall_state", "idle_state", "move_state", "slide_state")]
+[node name="Dash" type="Node" parent="State_machine" unique_id=138695011 node_paths=PackedStringArray("fall_state", "idle_state", "move_state", "slide_state")]
 script = ExtResource("11_fd4e3")
 fall_state = NodePath("../Fall")
 idle_state = NodePath("../Idle")
 move_state = NodePath("../Move")
 slide_state = NodePath("../Slide")
 
-[node name="Move" type="Node" parent="State_machine" node_paths=PackedStringArray("fall_state", "idle_state", "jump_state", "slide_state", "dash_state")]
+[node name="Move" type="Node" parent="State_machine" unique_id=790607061 node_paths=PackedStringArray("fall_state", "idle_state", "jump_state", "slide_state", "dash_state")]
 script = ExtResource("11_ukyrk")
 fall_state = NodePath("../Fall")
 idle_state = NodePath("../Idle")
@@ -79,7 +79,7 @@ jump_state = NodePath("../Jump")
 slide_state = NodePath("../Slide")
 dash_state = NodePath("../Dash")
 
-[node name="Slide" type="Node" parent="State_machine" node_paths=PackedStringArray("fall_state", "idle_state", "move_state", "jump_state", "double_jump_state")]
+[node name="Slide" type="Node" parent="State_machine" unique_id=2115875227 node_paths=PackedStringArray("fall_state", "idle_state", "move_state", "jump_state", "double_jump_state")]
 script = ExtResource("8_ukyrk")
 fall_state = NodePath("../Fall")
 idle_state = NodePath("../Idle")
@@ -87,22 +87,22 @@ move_state = NodePath("../Move")
 jump_state = NodePath("../Jump")
 double_jump_state = NodePath("../Double_jump")
 
-[node name="Wall_grab" type="Node" parent="State_machine" node_paths=PackedStringArray("idle_state", "wall_jump_state", "fall_state", "dash_state")]
+[node name="Wall_grab" type="Node" parent="State_machine" unique_id=1957661052 node_paths=PackedStringArray("idle_state", "wall_jump_state", "fall_state", "dash_state")]
 script = ExtResource("9_7dp3o")
 idle_state = NodePath("../Idle")
 wall_jump_state = NodePath("../Wall_jump")
 fall_state = NodePath("../Fall")
 dash_state = NodePath("../Dash")
 
-[node name="Wall_jump" type="Node" parent="State_machine" node_paths=PackedStringArray("fall_state", "double_jump_state", "wall_grab_state")]
+[node name="Wall_jump" type="Node" parent="State_machine" unique_id=1213510263 node_paths=PackedStringArray("fall_state", "double_jump_state", "wall_grab_state")]
 script = ExtResource("10_h4iuc")
 fall_state = NodePath("../Fall")
 double_jump_state = NodePath("../Double_jump")
 wall_grab_state = NodePath("../Wall_grab")
 
-[node name="Sprite" parent="." instance=ExtResource("1_v0iea")]
+[node name="Sprite" parent="." unique_id=837963168 instance=ExtResource("1_v0iea")]
 
-[node name="Health_bar" type="TextureProgressBar" parent="."]
+[node name="Health_bar" type="TextureProgressBar" parent="." unique_id=1166197807]
 unique_name_in_owner = true
 self_modulate = Color(0.7647059, 0, 0, 1)
 offset_left = -89.0
@@ -114,70 +114,70 @@ value = 150.0
 fill_mode = 5
 texture_progress = ExtResource("6_x3wgy")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=796345904]
 position = Vector2(-1, -21)
 shape = SubResource("CapsuleShape2D_cvnsp")
 
-[node name="HurtBoxComponet" parent="." node_paths=PackedStringArray("Health") groups=["Damageable"] instance=ExtResource("3_vgqql")]
+[node name="HurtBoxComponet" parent="." unique_id=163580670 node_paths=PackedStringArray("Health") groups=["Damageable"] instance=ExtResource("3_vgqql")]
 position = Vector2(-1, -21)
 collision_mask = 0
 Health = NodePath("../HealthComponet")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBoxComponet"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBoxComponet" unique_id=1074647147]
 shape = SubResource("CapsuleShape2D_x3wgy")
 debug_color = Color(1, 0, 0, 0.41960785)
 
-[node name="HealthComponet" parent="." instance=ExtResource("4_fkybt")]
+[node name="HealthComponet" parent="." unique_id=447819710 instance=ExtResource("4_fkybt")]
 max_health = 1e+38
 
-[node name="Pistol" parent="." instance=ExtResource("5_fkybt")]
+[node name="Pistol" parent="." unique_id=1590056783 instance=ExtResource("5_fkybt")]
 position = Vector2(-1, -40)
 
-[node name="Centre" type="Marker2D" parent="."]
+[node name="Centre" type="Marker2D" parent="." unique_id=223066934]
 position = Vector2(-1, -40)
 
-[node name="Smoke_point" type="Marker2D" parent="."]
+[node name="Smoke_point" type="Marker2D" parent="." unique_id=1918042283]
 position = Vector2(-1, 22)
 
-[node name="Dmg_num" type="Marker2D" parent="."]
+[node name="Dmg_num" type="Marker2D" parent="." unique_id=344421205]
 position = Vector2(2, -64)
 
-[node name="RightWallMiddle" type="RayCast2D" parent="."]
+[node name="RightWallMiddle" type="RayCast2D" parent="." unique_id=1365517342]
 modulate = Color(0, 0.1333332, 1, 1)
 position = Vector2(-1, -21)
 target_position = Vector2(31, 0)
 collision_mask = 2
 hit_from_inside = true
 
-[node name="LeftWallTop" type="RayCast2D" parent="."]
+[node name="LeftWallTop" type="RayCast2D" parent="." unique_id=815309074]
 modulate = Color(0, 0.1333332, 1, 1)
 position = Vector2(-1, -64)
 target_position = Vector2(-31, 0)
 collision_mask = 2
 hit_from_inside = true
 
-[node name="RightWallTop" type="RayCast2D" parent="."]
+[node name="RightWallTop" type="RayCast2D" parent="." unique_id=1584345344]
 modulate = Color(0, 0.1333332, 1, 1)
 position = Vector2(-1, -64)
 target_position = Vector2(31, 0)
 collision_mask = 2
 hit_from_inside = true
 
-[node name="LeftWallBottom" type="RayCast2D" parent="."]
+[node name="LeftWallBottom" type="RayCast2D" parent="." unique_id=1187182498]
 modulate = Color(0, 0.1333332, 1, 1)
 position = Vector2(-1, 22)
 target_position = Vector2(-31, 0)
 collision_mask = 2
 hit_from_inside = true
 
-[node name="RightWallBottom" type="RayCast2D" parent="."]
+[node name="RightWallBottom" type="RayCast2D" parent="." unique_id=409262532]
 modulate = Color(0, 0.1333332, 1, 1)
 position = Vector2(-1, 22)
 target_position = Vector2(31, 0)
 collision_mask = 2
 hit_from_inside = true
 
-[node name="LeftWallMiddle" type="RayCast2D" parent="."]
+[node name="LeftWallMiddle" type="RayCast2D" parent="." unique_id=839862678]
 position = Vector2(-1, -21)
 target_position = Vector2(-31, 0)
 collision_mask = 2

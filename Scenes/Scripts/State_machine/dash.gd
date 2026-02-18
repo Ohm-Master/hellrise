@@ -14,7 +14,6 @@ func enter() -> void:
 	parent.dash_timer = parent.dash_time
 	parent.can_dash = false
 	
-	print(parent.dash_direction)
 	if parent.dash_direction == parent.DIR.RIGHT or parent.dash_direction == parent.DIR.LEFT:
 		if parent.is_on_floor():
 			parent.velocity = parent.dash_direction_to_Vector2() * parent.dash_speed
@@ -39,9 +38,9 @@ func process_physics(delta: float) -> State:
 	
 	parent.dash_timer -= delta
 	
-	if not parent.dash_direction == parent.DIR.LEFT or parent.dash_direction == parent.DIR.RIGHT:
+	if not parent.dash_direction == parent.DIR.LEFT and not parent.dash_direction == parent.DIR.RIGHT:
 		parent.velocity.y = move_toward(parent.velocity.y, -1000, 15000 * delta)
-	
+
 	return null
 
 func calculate_end_state() -> State:

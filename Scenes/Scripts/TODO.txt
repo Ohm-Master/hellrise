@@ -1,41 +1,42 @@
 TODO:
 	Player:
-		✅Add crouch/slide.
-		✅Add wall grab/slide/jump.
-		✅Add dash.
-		✅Add wall dash.
-		✅Add air dash limit.
+		✔Add crouch/slide.✔
+		✔Add wall grab/slide/jump.✔
+		✔Add dash.✔
+		✔Add wall dash.✔
+		✔Add air dash limit.✔
 		Add air dash cooldown bar.
-		Add 8-way dashing.
-		✅Add jump buffering.
-		✅Add coyote time.
+		✔Add 8-way dashing.✔
+		✔Add jump buffering.✔
+		✔Add coyote time.✔
 		Add health bar with numbers.
 		Make it so that the player's hurtbox gets smaller during slide.
-		✅Make it so that you jump farther when you slide jump.
+		✔Make it so that you jump farther when you slide jump.✔
 	Guns:
-		✅Add pistol cooldown.
-		Add a Gun comoponent.
+		✔Add pistol cooldown.✔
+		Add a Gun class.
 		Add shotgun pellet.
 		Add shotgun.
 		Add bullet grace period where it can't get destroyed.
 	Enemies:
 		Add new enemy.
 		Make explosion do knockback.
-		✅Make it so enemies do less damage when hit other enemies.
+		✔Make it so enemies do less damage when hit other enemies.✔
 	Animations:
 		Add animation queuing for sprite
 		Make dash anim and vfx
 		Make slide anim
 		Make wall grab anim
+		Make partictile effect for dash
 	Art:
-		✅Draw vertical brick texture.
-		✅Draw alt pistol texture.  
+		✔Draw vertical brick texture.✔
+		✔Draw alt pistol texture.✔
 		Draw lucifer texture
-		✅Draw 1st boss texture (Guardian of heaven)
+		✔Draw 1st boss texture (Guardian of heaven)✔
 	Bugs:
-		✅Fix player stopping when pressing A and D at the same time.
+		✔Fix player stopping when pressing A and D at the same time.✔
 		Fix bullets sometimes doing double damage.
-		✅Fix Gun being able to shoot throu walls.
-		✅Fix health bar not fading when hit in quick succession. 
-		✅Fix all floating damage numbers increasing size when final hit.
+		✔Fix Gun being able to shoot throu walls.✔
+		✔Fix health bar not fading when hit in quick succession.✔ 
+		✔Fix all floating damage numbers increasing size when final hit.✔
 	
