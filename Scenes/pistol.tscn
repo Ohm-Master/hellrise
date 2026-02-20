@@ -1,21 +1,22 @@
-[gd_scene load_steps=3 format=3 uid="uid://bvyhlnhreopdw"]
+[gd_scene format=3 uid="uid://bvyhlnhreopdw"]
 
 [ext_resource type="Script" uid="uid://dax5nje5nubx1" path="res://Scenes/Scripts/pistol.gd" id="1_ui64p"]
 [ext_resource type="Texture2D" uid="uid://j05n8oyfgsj2" path="res://Assets/Gun-1.png (3).png" id="1_v21tj"]
 
-[node name="Pistol" type="Node2D"]
+[node name="Pistol" type="Node2D" unique_id=1929661659]
 script = ExtResource("1_ui64p")
 
-[node name="Pivot_point" type="Marker2D" parent="."]
+[node name="Pivot_point" type="Marker2D" parent="." unique_id=1874023531]
 
-[node name="Pistol" type="Sprite2D" parent="Pivot_point"]
+[node name="Pistol" type="Sprite2D" parent="Pivot_point" unique_id=1944917551]
 position = Vector2(196, 0)
 texture = ExtResource("1_v21tj")
 flip_v = true
 
-[node name="Shoot_point" type="Marker2D" parent="Pivot_point/Pistol"]
+[node name="Shoot_point" type="Marker2D" parent="Pivot_point/Pistol" unique_id=1458975826]
 position = Vector2(43, 8)
 
-[node name="RayCast2D" type="RayCast2D" parent="."]
+[node name="RayCast2D" type="RayCast2D" parent="." unique_id=1722908344]
+visible = false
 target_position = Vector2(248, 0)
 collision_mask = 2

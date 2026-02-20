@@ -9,6 +9,9 @@ class_name Slide_state
 @export var double_jump_state : State
 
 func enter() -> void:
+	parent.disable_collision()
+	parent.enable_slide_collision()
+	
 	parent.is_sliding = true
 	if parent.direction == parent.DIR.RIGHT:
 		parent.velocity.x = parent.slide_speed
@@ -32,3 +35,7 @@ func process_input(_event: InputEvent) -> State:
 		elif not parent.is_on_floor():
 				return fall_state
 	return null
+
+func exit() -> void:
+	parent.disable_slide_collision()
+	parent.enable_collision()

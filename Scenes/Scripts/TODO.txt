@@ -10,20 +10,21 @@ TODO:
 		✔Add jump buffering.✔
 		✔Add coyote time.✔
 		Add health bar with numbers.
-		Make it so that the player's hurtbox gets smaller during slide.
+		✔Make it so that the player's hurtbox gets smaller during slide.✔
 		✔Make it so that you jump farther when you slide jump.✔
+		Add death screen.
 	Guns:
 		✔Add pistol cooldown.✔
 		Add a Gun class.
 		Add shotgun pellet.
 		Add shotgun.
-		Add bullet grace period where it can't get destroyed.
+		✔Add bullet grace period where it can't get destroyed.✔
 	Enemies:
 		Add new enemy.
 		Make explosion do knockback.
 		✔Make it so enemies do less damage when hit other enemies.✔
 	Animations:
-		Add animation queuing for sprite
+		Add animation queuing for spritecdad
 		Make dash anim and vfx
 		Make slide anim
 		Make wall grab anim
@@ -31,8 +32,9 @@ TODO:
 	Art:
 		✔Draw vertical brick texture.✔
 		✔Draw alt pistol texture.✔
-		Draw lucifer texture
-		✔Draw 1st boss texture (Guardian of heaven)✔
+		Draw lucifer texture.
+		Draw death screen.
+		✔Draw 1st boss texture (Guardian of heaven).✔
 	Bugs:
 		✔Fix player stopping when pressing A and D at the same time.✔
 		Fix bullets sometimes doing double damage.

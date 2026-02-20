@@ -181,6 +181,26 @@ func dash_direction_to_Vector2() -> Vector2:
 func die():
 	queue_free()
 
+func disable_collision():
+	$HurtBoxComponet.monitorable = false
+	$HurtBoxComponet.monitoring = false
+	$CollisionShape2D.disabled = true
+
+func enable_collision():
+	$HurtBoxComponet.monitorable = true
+	$HurtBoxComponet.monitoring = true
+	$CollisionShape2D.disabled = false
+	
+func enable_slide_collision():
+	$SlideHurtBoxComponet.monitorable = true
+	$HurtBoxComponet.monitoring = true
+	$SlideCollisionShape.disabled = false
+
+func disable_slide_collision():
+	$SlideHurtBoxComponet.monitorable = false
+	$HurtBoxComponet.monitoring = false	
+	$SlideCollisionShape.disabled = true
+
 func _on_health_changed(currenthp: float, maxhp: float) -> void:
 	%Health_bar.value = currenthp
 	%Health_bar.max_value = maxhp

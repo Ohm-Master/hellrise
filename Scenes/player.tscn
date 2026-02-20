@@ -25,10 +25,30 @@ height = 88.0
 radius = 23.0
 height = 80.0
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fd4e3"]
+radius = 20.0
+height = 58.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qqcod"]
+radius = 17.0
+height = 56.0
+
 [node name="Player" type="CharacterBody2D" unique_id=854270287 groups=["Player"]]
 texture_filter = 1
 collision_mask = 6
 script = ExtResource("1_cvnsp")
+
+[node name="Health_bar" type="TextureProgressBar" parent="." unique_id=1166197807]
+unique_name_in_owner = true
+self_modulate = Color(0.7647059, 0, 0, 1)
+offset_left = -89.0
+offset_top = -127.0
+offset_right = 86.0
+offset_bottom = 48.0
+max_value = 150.0
+value = 150.0
+fill_mode = 5
+texture_progress = ExtResource("6_x3wgy")
 
 [node name="State_machine" type="Node" parent="." unique_id=614136622 node_paths=PackedStringArray("starting_state")]
 script = ExtResource("7_3smsa")
@@ -102,23 +122,13 @@ wall_grab_state = NodePath("../Wall_grab")
 
 [node name="Sprite" parent="." unique_id=837963168 instance=ExtResource("1_v0iea")]
 
-[node name="Health_bar" type="TextureProgressBar" parent="." unique_id=1166197807]
-unique_name_in_owner = true
-self_modulate = Color(0.7647059, 0, 0, 1)
-offset_left = -89.0
-offset_top = -127.0
-offset_right = 86.0
-offset_bottom = 48.0
-max_value = 150.0
-value = 150.0
-fill_mode = 5
-texture_progress = ExtResource("6_x3wgy")
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=796345904]
+visible = false
 position = Vector2(-1, -21)
 shape = SubResource("CapsuleShape2D_cvnsp")
 
 [node name="HurtBoxComponet" parent="." unique_id=163580670 node_paths=PackedStringArray("Health") groups=["Damageable"] instance=ExtResource("3_vgqql")]
+visible = false
 position = Vector2(-1, -21)
 collision_mask = 0
 Health = NodePath("../HealthComponet")
@@ -127,22 +137,48 @@ Health = NodePath("../HealthComponet")
 shape = SubResource("CapsuleShape2D_x3wgy")
 debug_color = Color(1, 0, 0, 0.41960785)
 
+[node name="SlideCollisionShape" type="CollisionShape2D" parent="." unique_id=1592272527]
+visible = false
+position = Vector2(0, 3)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_fd4e3")
+disabled = true
+debug_color = Color(0, 0.5950001, 0.7, 0.23529412)
+
+[node name="SlideHurtBoxComponet" parent="." unique_id=2105442281 node_paths=PackedStringArray("Health") groups=["Damageable"] instance=ExtResource("3_vgqql")]
+visible = false
+position = Vector2(-1, -21)
+collision_mask = 0
+monitorable = false
+Health = NodePath("../HealthComponet")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SlideHurtBoxComponet" unique_id=1760298268]
+position = Vector2(1, 24)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_qqcod")
+debug_color = Color(1, 0, 0, 0.25490198)
+
 [node name="HealthComponet" parent="." unique_id=447819710 instance=ExtResource("4_fkybt")]
+visible = false
 max_health = 1e+38
 
 [node name="Pistol" parent="." unique_id=1590056783 instance=ExtResource("5_fkybt")]
 position = Vector2(-1, -40)
 
 [node name="Centre" type="Marker2D" parent="." unique_id=223066934]
+visible = false
 position = Vector2(-1, -40)
 
 [node name="Smoke_point" type="Marker2D" parent="." unique_id=1918042283]
+visible = false
 position = Vector2(-1, 22)
 
 [node name="Dmg_num" type="Marker2D" parent="." unique_id=344421205]
+visible = false
 position = Vector2(2, -64)
 
 [node name="RightWallMiddle" type="RayCast2D" parent="." unique_id=1365517342]
+visible = false
 modulate = Color(0, 0.1333332, 1, 1)
 position = Vector2(-1, -21)
 target_position = Vector2(31, 0)
@@ -150,6 +186,7 @@ collision_mask = 2
 hit_from_inside = true
 
 [node name="LeftWallTop" type="RayCast2D" parent="." unique_id=815309074]
+visible = false
 modulate = Color(0, 0.1333332, 1, 1)
 position = Vector2(-1, -64)
 target_position = Vector2(-31, 0)
@@ -157,6 +194,7 @@ collision_mask = 2
 hit_from_inside = true
 
 [node name="RightWallTop" type="RayCast2D" parent="." unique_id=1584345344]
+visible = false
 modulate = Color(0, 0.1333332, 1, 1)
 position = Vector2(-1, -64)
 target_position = Vector2(31, 0)
@@ -164,6 +202,7 @@ collision_mask = 2
 hit_from_inside = true
 
 [node name="LeftWallBottom" type="RayCast2D" parent="." unique_id=1187182498]
+visible = false
 modulate = Color(0, 0.1333332, 1, 1)
 position = Vector2(-1, 22)
 target_position = Vector2(-31, 0)
@@ -171,6 +210,7 @@ collision_mask = 2
 hit_from_inside = true
 
 [node name="RightWallBottom" type="RayCast2D" parent="." unique_id=409262532]
+visible = false
 modulate = Color(0, 0.1333332, 1, 1)
 position = Vector2(-1, 22)
 target_position = Vector2(31, 0)
@@ -178,6 +218,7 @@ collision_mask = 2
 hit_from_inside = true
 
 [node name="LeftWallMiddle" type="RayCast2D" parent="." unique_id=839862678]
+visible = false
 position = Vector2(-1, -21)
 target_position = Vector2(-31, 0)
 collision_mask = 2
