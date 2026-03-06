@@ -49,15 +49,13 @@ var direction : DIR
 var wall_jump_direction : DIR
 var dash_direction : DIR
 
-
-var fade_tween : Tween
+var health_bar_fade_tween : Tween
 
 func _ready() -> void:
 	state_machine.init(self)
-	#Fades out HP bar
 	%Health_bar.modulate.a = 1
-	fade_tween = create_tween()
-	fade_tween.tween_property(%Health_bar, "modulate:a", 0.0, 1.0)
+	#health_bar_fade_tween = create_tween()
+	#health_bar_fade_tween.tween_property(%Health_bar, "modulate:a", 0.0, 1.0)
 
 func _physics_process(delta: float) -> void:
 	state_machine.process_physics(delta)
@@ -80,7 +78,9 @@ func _process(delta: float) -> void:
 	can_dash = dash_cooldown_timer <= 0
 	air_dashes += delta * 0.5714
 	air_dashes = clampf(air_dashes, 0, max_air_dashes)
-
+	
+	handle_stamina_bar()
+	
 func apply_gravitiy(delta : float):
 	if not is_on_floor() and not state_machine.current_state is Wall_grab_state:
 		velocity.y += gravity * delta
@@ -201,13 +201,30 @@ func disable_slide_collision():
 	$HurtBoxComponet.monitoring = false	
 	$SlideCollisionShape.disabled = true
 
-func _on_health_changed(currenthp: float, maxhp: float) -> void:
-	%Health_bar.value = currenthp
-	%Health_bar.max_value = maxhp
-	%Health_bar.modulate.a = 1
-		
-	if fade_tween and fade_tween.is_running():
-		fade_tween.kill()
+func handle_stamina_bar():
+	$StaminaBarSegment1.value = air_dashes
+	$StaminaBarSegment2.value = air_dashes
+	$StaminaBarSegment3.value = air_dashes
 	
-	fade_tween = create_tween()
-	fade_tween.tween_property(%Health_bar, "modulate:a", 0.0, 1.0)
+#	if $StaminaBarSegment3.value == 3.0:
+#		var stamina_bar_fade_tween = create_tween()
+#		stamina_bar_fade_tween.tween_property($StaminaBarSegment1, "modulate:a", 0.0, 1.0)
+#		stamina_bar_fade_tween.parallel().tween_property($StaminaBarSegment2, "modulate:a", 0.0, 1.0)
+#		stamina_bar_fade_tween.parallel().tween_property($StaminaBarSegment3, "modulate:a", 0.0, 1.0)
+#		
+#	else:
+#		$StaminaBarSegment1.modulate.a = 1
+#		$StaminaBarSegment2.modulate.a = 1
+#		$StaminaBarSegment3.modulate.a = 1
+#		
+#func _on_health_changed(currenthp: float, maxhp: float) -> void:
+#	%Health_bar.value = currenthp
+#	%Health_bar.max_value = maxhp
+#	%Health_bar.modulate.a = 1
+#		
+#	if health_bar_fade_tween and health_bar_fade_tween.is_running():
+#		health_bar_fade_tween.kill()
+#	
+#	health_bar_fade_tween = create_tween()
+#	health_bar_fade_tween.tween_property(%Health_bar, "modulate:a", 0.0, 1.0)
+#

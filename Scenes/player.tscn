@@ -16,6 +16,8 @@
 [ext_resource type="Script" uid="uid://bwehkokxmdk7w" path="res://Scenes/Scripts/State_machine/dash.gd" id="11_fd4e3"]
 [ext_resource type="Script" uid="uid://cnm3gxnaiwubb" path="res://Scenes/Scripts/State_machine/move.gd" id="11_ukyrk"]
 [ext_resource type="Script" uid="uid://cl27hfoaulft5" path="res://Scenes/Scripts/State_machine/double_jump.gd" id="12_pu2lt"]
+[ext_resource type="Texture2D" uid="uid://be2qu3xxbfdvd" path="res://Assets/stamina_bar_1.png" id="17_igrcy"]
+[ext_resource type="Texture2D" uid="uid://bfa6wda4wo1ck" path="res://Assets/stamina_bar_2.png" id="18_fs7ks"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_cvnsp"]
 radius = 26.0
@@ -33,6 +35,9 @@ height = 58.0
 radius = 17.0
 height = 56.0
 
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_fs7ks"]
+load_path = "res://.godot/imported/stamina_bar_3.png-ee7f75c1916e05a049cf909d5683d2f8.ctex"
+
 [node name="Player" type="CharacterBody2D" unique_id=854270287 groups=["Player"]]
 texture_filter = 1
 collision_mask = 6
@@ -46,6 +51,7 @@ offset_top = -127.0
 offset_right = 86.0
 offset_bottom = 48.0
 max_value = 150.0
+step = 0.0
 value = 150.0
 fill_mode = 5
 texture_progress = ExtResource("6_x3wgy")
@@ -123,12 +129,10 @@ wall_grab_state = NodePath("../Wall_grab")
 [node name="Sprite" parent="." unique_id=837963168 instance=ExtResource("1_v0iea")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=796345904]
-visible = false
 position = Vector2(-1, -21)
 shape = SubResource("CapsuleShape2D_cvnsp")
 
 [node name="HurtBoxComponet" parent="." unique_id=163580670 node_paths=PackedStringArray("Health") groups=["Damageable"] instance=ExtResource("3_vgqql")]
-visible = false
 position = Vector2(-1, -21)
 collision_mask = 0
 Health = NodePath("../HealthComponet")
@@ -159,26 +163,21 @@ shape = SubResource("CapsuleShape2D_qqcod")
 debug_color = Color(1, 0, 0, 0.25490198)
 
 [node name="HealthComponet" parent="." unique_id=447819710 instance=ExtResource("4_fkybt")]
-visible = false
 max_health = 1e+38
 
 [node name="Pistol" parent="." unique_id=1590056783 instance=ExtResource("5_fkybt")]
 position = Vector2(-1, -40)
 
 [node name="Centre" type="Marker2D" parent="." unique_id=223066934]
-visible = false
 position = Vector2(-1, -40)
 
 [node name="Smoke_point" type="Marker2D" parent="." unique_id=1918042283]
-visible = false
 position = Vector2(-1, 22)
 
 [node name="Dmg_num" type="Marker2D" parent="." unique_id=344421205]
-visible = false
 position = Vector2(2, -64)
 
 [node name="RightWallMiddle" type="RayCast2D" parent="." unique_id=1365517342]
-visible = false
 modulate = Color(0, 0.1333332, 1, 1)
 position = Vector2(-1, -21)
 target_position = Vector2(31, 0)
@@ -186,7 +185,6 @@ collision_mask = 2
 hit_from_inside = true
 
 [node name="LeftWallTop" type="RayCast2D" parent="." unique_id=815309074]
-visible = false
 modulate = Color(0, 0.1333332, 1, 1)
 position = Vector2(-1, -64)
 target_position = Vector2(-31, 0)
@@ -194,7 +192,6 @@ collision_mask = 2
 hit_from_inside = true
 
 [node name="RightWallTop" type="RayCast2D" parent="." unique_id=1584345344]
-visible = false
 modulate = Color(0, 0.1333332, 1, 1)
 position = Vector2(-1, -64)
 target_position = Vector2(31, 0)
@@ -202,7 +199,6 @@ collision_mask = 2
 hit_from_inside = true
 
 [node name="LeftWallBottom" type="RayCast2D" parent="." unique_id=1187182498]
-visible = false
 modulate = Color(0, 0.1333332, 1, 1)
 position = Vector2(-1, 22)
 target_position = Vector2(-31, 0)
@@ -210,7 +206,6 @@ collision_mask = 2
 hit_from_inside = true
 
 [node name="RightWallBottom" type="RayCast2D" parent="." unique_id=409262532]
-visible = false
 modulate = Color(0, 0.1333332, 1, 1)
 position = Vector2(-1, 22)
 target_position = Vector2(31, 0)
@@ -218,9 +213,50 @@ collision_mask = 2
 hit_from_inside = true
 
 [node name="LeftWallMiddle" type="RayCast2D" parent="." unique_id=839862678]
-visible = false
 position = Vector2(-1, -21)
 target_position = Vector2(-31, 0)
 collision_mask = 2
+
+[node name="StaminaBarSegment1" type="TextureProgressBar" parent="." unique_id=224246109]
+modulate = Color(0, 0.75, 1, 1)
+texture_filter = 1
+offset_left = -109.0
+offset_top = -84.0
+offset_right = -84.0
+offset_bottom = -39.0
+max_value = 1.0
+step = 0.0
+value = 1.0
+fill_mode = 3
+texture_progress = ExtResource("17_igrcy")
+
+[node name="StaminaBarSegment2" type="TextureProgressBar" parent="." unique_id=1201292305]
+modulate = Color(0, 0.7490196, 1, 1)
+texture_filter = 1
+offset_left = -94.0
+offset_top = -132.0
+offset_right = -54.0
+offset_bottom = -87.0
+min_value = 1.0
+max_value = 2.0
+step = 0.0
+value = 2.0
+fill_mode = 4
+radial_initial_angle = 270.0
+radial_fill_degrees = 90.0
+radial_center_offset = Vector2(20, 30)
+texture_progress = SubResource("CompressedTexture2D_fs7ks")
+
+[node name="StaminaBarSegment3" type="TextureProgressBar" parent="." unique_id=1107308783]
+modulate = Color(0, 0.7490196, 1, 1)
+texture_filter = 1
+offset_left = -45.0
+offset_top = -147.0
+offset_bottom = -102.0
+min_value = 2.0
+max_value = 3.0
+step = 0.0
+value = 3.0
+texture_progress = ExtResource("18_fs7ks")
 
 [connection signal="health_changed" from="HealthComponet" to="." method="_on_health_changed"]
