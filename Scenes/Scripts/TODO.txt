@@ -15,7 +15,6 @@ TODO:
 		✅Add 8-way dashing.
 		✅Add jump buffering.
 		✅Add coyote time.
-		Add health bar with numbers.
 		✅Make it so that the player's hurtbox gets smaller during slide.
 		✅Make it so that you jump farther when you slide jump.
 		Add death screen.

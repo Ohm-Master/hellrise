@@ -120,11 +120,12 @@ wall_jump_state = NodePath("../Wall_jump")
 fall_state = NodePath("../Fall")
 dash_state = NodePath("../Dash")
 
-[node name="Wall_jump" type="Node" parent="State_machine" unique_id=1213510263 node_paths=PackedStringArray("fall_state", "double_jump_state", "wall_grab_state")]
+[node name="Wall_jump" type="Node" parent="State_machine" unique_id=1213510263 node_paths=PackedStringArray("fall_state", "double_jump_state", "wall_grab_state", "dash_state")]
 script = ExtResource("10_h4iuc")
 fall_state = NodePath("../Fall")
 double_jump_state = NodePath("../Double_jump")
 wall_grab_state = NodePath("../Wall_grab")
+dash_state = NodePath("../Dash")
 
 [node name="Sprite" parent="." unique_id=837963168 instance=ExtResource("1_v0iea")]
 
@@ -167,6 +168,7 @@ max_health = 1e+38
 
 [node name="Pistol" parent="." unique_id=1590056783 instance=ExtResource("5_fkybt")]
 position = Vector2(-1, -40)
+damage = null
 
 [node name="Centre" type="Marker2D" parent="." unique_id=223066934]
 position = Vector2(-1, -40)

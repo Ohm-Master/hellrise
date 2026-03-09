@@ -5,6 +5,7 @@ class_name Wall_jump_state
 @export var fall_state : State
 @export var double_jump_state : State
 @export var wall_grab_state : State
+@export var dash_state : State
 
 var can_move := false
 var move_timer := 0.25
@@ -46,4 +47,8 @@ func process_physics(delta: float) -> State:
 func process_input(event: InputEvent) -> State:
 	if Input.is_action_just_pressed("Jump"):
 		return double_jump_state
+
+	if Input.is_action_just_pressed("Dash"):
+		return dash_state
+		
 	return null

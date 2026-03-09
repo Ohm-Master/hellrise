@@ -50,12 +50,13 @@ var wall_jump_direction : DIR
 var dash_direction : DIR
 
 var health_bar_fade_tween : Tween
+var stamina_bar_fade_tween : Tween
 
 func _ready() -> void:
 	state_machine.init(self)
 	%Health_bar.modulate.a = 1
-	#health_bar_fade_tween = create_tween()
-	#health_bar_fade_tween.tween_property(%Health_bar, "modulate:a", 0.0, 1.0)
+	health_bar_fade_tween = create_tween()
+	health_bar_fade_tween.tween_property(%Health_bar, "modulate:a", 0.1, 1.0)
 
 func _physics_process(delta: float) -> void:
 	state_machine.process_physics(delta)
@@ -169,7 +170,7 @@ func dash_direction_to_Vector2() -> Vector2:
 	var dir = Vector2.ZERO
 	match dash_direction:
 		DIR.UP: dir = Vector2.UP
-		DIR.DOWN: dir = Vector2.DOWN
+		DIR.DOWN: dir = Vector2(0, 1.7)
 		DIR.LEFT: dir = Vector2.LEFT
 		DIR.RIGHT: dir = Vector2.RIGHT
 		DIR.UP_LEFT: dir = Vector2(-1, -1)
@@ -205,26 +206,31 @@ func handle_stamina_bar():
 	$StaminaBarSegment1.value = air_dashes
 	$StaminaBarSegment2.value = air_dashes
 	$StaminaBarSegment3.value = air_dashes
+
+	if air_dashes == 3.0:
+		if stamina_bar_fade_tween and stamina_bar_fade_tween.is_running():
+			stamina_bar_fade_tween.kill()
+		
+		stamina_bar_fade_tween = create_tween()
+		
+		stamina_bar_fade_tween.tween_property($StaminaBarSegment1, "modulate:a", 0.1, 0.5)
+		stamina_bar_fade_tween.parallel().tween_property($StaminaBarSegment2, "modulate:a", 0.1, 0.5)
+		stamina_bar_fade_tween.parallel().tween_property($StaminaBarSegment3, "modulate:a", 0.1, 0.5)
+		
+	else:
+		if stamina_bar_fade_tween:
+			stamina_bar_fade_tween.kill()
+		$StaminaBarSegment1.modulate.a = 1
+		$StaminaBarSegment2.modulate.a = 1
+		$StaminaBarSegment3.modulate.a = 1
+		
+func _on_health_changed(currenthp: float, maxhp: float) -> void:
+	%Health_bar.value = currenthp
+	%Health_bar.max_value = maxhp
+	%Health_bar.modulate.a = 1
+		
+	if health_bar_fade_tween and health_bar_fade_tween.is_running():
+		health_bar_fade_tween.kill()
 	
-#	if $StaminaBarSegment3.value == 3.0:
-#		var stamina_bar_fade_tween = create_tween()
-#		stamina_bar_fade_tween.tween_property($StaminaBarSegment1, "modulate:a", 0.0, 1.0)
-#		stamina_bar_fade_tween.parallel().tween_property($StaminaBarSegment2, "modulate:a", 0.0, 1.0)
-#		stamina_bar_fade_tween.parallel().tween_property($StaminaBarSegment3, "modulate:a", 0.0, 1.0)
-#		
-#	else:
-#		$StaminaBarSegment1.modulate.a = 1
-#		$StaminaBarSegment2.modulate.a = 1
-#		$StaminaBarSegment3.modulate.a = 1
-#		
-#func _on_health_changed(currenthp: float, maxhp: float) -> void:
-#	%Health_bar.value = currenthp
-#	%Health_bar.max_value = maxhp
-#	%Health_bar.modulate.a = 1
-#		
-#	if health_bar_fade_tween and health_bar_fade_tween.is_running():
-#		health_bar_fade_tween.kill()
-#	
-#	health_bar_fade_tween = create_tween()
-#	health_bar_fade_tween.tween_property(%Health_bar, "modulate:a", 0.0, 1.0)
-#
+	health_bar_fade_tween = create_tween()
+	health_bar_fade_tween.tween_property(%Health_bar, "modulate:a", 0.1, 1.0)
