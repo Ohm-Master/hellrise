@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://cwakok6ey7g6w"]
+[gd_scene format=3 uid="uid://cwakok6ey7g6w"]
 
 [ext_resource type="Script" uid="uid://drrkmhilme2oh" path="res://Scenes/Scripts/damage_number.gd" id="1_n4jia"]
 
@@ -8,10 +8,11 @@ font_color = Color(1, 0, 0.016666412, 1)
 outline_size = 15
 outline_color = Color(0.37, 0, 0, 1)
 
-[node name="DamageNumber" type="Node2D"]
+[node name="DamageNumber" type="Node2D" unique_id=1239157144]
+z_index = 110
 script = ExtResource("1_n4jia")
 
-[node name="Label" type="Label" parent="."]
+[node name="Label" type="Label" parent="." unique_id=1761899907]
 offset_left = -23.0
 offset_top = -28.0
 offset_right = 23.0

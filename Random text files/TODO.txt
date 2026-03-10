@@ -17,11 +17,11 @@ TODO:
 		✅Add coyote time.
 		✅Make it so that the player's hurtbox gets smaller during slide.
 		✅Make it so that you jump farther when you slide jump.
+		✅Add ground slam.
 		Add death screen.
-		Add ground slam.
 	Guns:
 		✅Add pistol cooldown.
-		Add a Gun class.
+		✅Add a Gun class.
 		Add shotgun pellet.
 		Add shotgun.
 		✅Add bullet grace period where it can't get destroyed.
@@ -40,6 +40,8 @@ TODO:
 		✅Draw alt pistol texture.
 		Draw lucifer texture.
 		Draw death screen.
+		Draw shotgun texture.
+		Draw pellet texture.
 		✅Draw 1st boss texture (Guardian of heaven).
 	Bugs:
 		✅Fix player stopping when pressing A and D at the same time.

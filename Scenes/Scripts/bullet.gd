@@ -1,7 +1,7 @@
 extends Node2D
 
 var speed := 3000.0
-var damage := 10.0
+var damage : float
 
 var parent
 var the_owner : String

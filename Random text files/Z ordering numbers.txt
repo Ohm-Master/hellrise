@@ -1,0 +1,6 @@
+Player = 100
+Enemies = 90
+Floating damage number = 110
+Player UI = 105
+bullets = 40
+Tile map = 50
