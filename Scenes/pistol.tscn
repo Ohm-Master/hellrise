@@ -10,8 +10,8 @@ script = ExtResource("1_ui64p")
 BULLET = ExtResource("2_ui64p")
 ray_cast = NodePath("RayCast2D")
 sprite = NodePath("Pivot_point/Pistol")
-damage = 10.0
-cooldown = 100.0
+Damage = 10.0
+cooldown = 0.3
 
 [node name="Pivot_point" type="Marker2D" parent="." unique_id=1874023531]
 

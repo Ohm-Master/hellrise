@@ -4,3 +4,4 @@ Floating damage number = 110
 Player UI = 105
 bullets = 40
 Tile map = 50
+Gun = 80

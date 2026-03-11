@@ -1,3 +1,4 @@
+@abstract
 extends Node2D
 
 class_name Gun
@@ -6,7 +7,7 @@ class_name Gun
 @export var ray_cast : RayCast2D
 @export var sprite : Sprite2D
 
-@export var damage : float
+@export var Damage : float
 @export var cooldown : float
 var cooldown_timer := 0.0
 var can_shoot := false
@@ -27,9 +28,8 @@ func _process(delta: float) -> void:
 
 func _input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("Shoot") and can_shoot:
+		cooldown_timer = cooldown
 		shoot()
 	
 
-func shoot():
-	cooldown_timer = cooldown
-	
+@abstract func shoot() -> void

@@ -46,6 +46,7 @@ script = ExtResource("1_cvnsp")
 
 [node name="Health_bar" type="TextureProgressBar" parent="." unique_id=1166197807]
 unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0)
 self_modulate = Color(0.7647059, 0, 0, 1)
 z_index = 105
 offset_left = -89.0

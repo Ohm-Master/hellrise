@@ -54,7 +54,7 @@ var stamina_bar_fade_tween : Tween
 
 func _ready() -> void:
 	state_machine.init(self)
-	%Health_bar.modulate.a = 1
+	
 	health_bar_fade_tween = create_tween()
 	health_bar_fade_tween.tween_property(%Health_bar, "modulate:a", 0.1, 1.0)
 
