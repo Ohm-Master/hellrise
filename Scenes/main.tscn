@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://ku7br6u12kpi" path="res://Scenes/robohead.tscn" id="3_8gbba"]
 [ext_resource type="Texture2D" uid="uid://0wrfe65esrae" path="res://Assets/cursor_stamina_bar.png" id="4_jjvhh"]
 [ext_resource type="Script" uid="uid://cwscsawhn2wqa" path="res://Scenes/Scripts/ui.gd" id="4_kry3j"]
+[ext_resource type="PackedScene" uid="uid://mcwijsbpt0kn" path="res://Scenes/shotgun.tscn" id="6_21xkr"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jjvhh"]
 texture = ExtResource("2_8gbba")
@@ -89,3 +90,5 @@ texture_progress = ExtResource("4_jjvhh")
 zoom = Vector2(0.4, 0.4)
 position_smoothing_enabled = true
 position_smoothing_speed = 7.5
+
+[node name="Shotgun" parent="." unique_id=975713575 instance=ExtResource("6_21xkr")]

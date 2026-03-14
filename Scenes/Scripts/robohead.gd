@@ -29,6 +29,7 @@ var damage_taken := false
 
 var move_speed := 600
 var damage := 20.0
+var bullet_speed := 4000
 var shoot_cooldown := 0.5
 var shoot_timer := 1.0
 
@@ -128,6 +129,7 @@ func shoot():
 	bullet.parent = $HurtBoxComponet
 	bullet.the_owner = "Enemy"
 	bullet.damage = damage
+	bullet.speed = bullet_speed
 	
 	get_tree().current_scene.add_child(bullet)
 	
@@ -161,9 +163,7 @@ func calculate_zones():
 				if i.is_in_group("Player"):
 					in_shoot_zone = true
 					break
-			
 
-	
 func _on_chase_zone_body_entered(body: Node2D) -> void:
 	if body.is_in_group("Player"):
 		var hit = raycast.get_collider()

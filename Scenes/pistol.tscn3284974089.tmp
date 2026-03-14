@@ -4,15 +4,13 @@
 [ext_resource type="Texture2D" uid="uid://j05n8oyfgsj2" path="res://Assets/Gun-1.png (3).png" id="1_v21tj"]
 [ext_resource type="PackedScene" uid="uid://d1kqj34jeqaf" path="res://Scenes/bullet.tscn" id="2_ui64p"]
 
-[node name="Pistol" type="Node2D" unique_id=1929661659 node_paths=PackedStringArray("ray_cast", "sprite", "shoot_point")]
+[node name="Pistol" type="Node2D" unique_id=1929661659 node_paths=PackedStringArray("ray_cast", "sprite")]
 z_index = 80
 script = ExtResource("1_ui64p")
 BULLET = ExtResource("2_ui64p")
 ray_cast = NodePath("RayCast2D")
 sprite = NodePath("Pivot_point/Pistol")
-shoot_point = NodePath("Pivot_point/Pistol/Shoot_point")
-bullet_damage = 5.0
-bullet_speed = 4500.0
+bullet_damage = 10.0
 cooldown = 0.3
 
 [node name="Pivot_point" type="Marker2D" parent="." unique_id=1874023531]

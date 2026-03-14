@@ -46,7 +46,7 @@ script = ExtResource("1_cvnsp")
 
 [node name="Health_bar" type="TextureProgressBar" parent="." unique_id=1166197807]
 unique_name_in_owner = true
-modulate = Color(1, 1, 1, 0)
+modulate = Color(1, 1, 1, 0.1)
 self_modulate = Color(0.7647059, 0, 0, 1)
 z_index = 105
 offset_left = -89.0
@@ -212,11 +212,10 @@ shape = SubResource("CapsuleShape2D_qqcod")
 debug_color = Color(1, 0, 0, 0.25490198)
 
 [node name="HealthComponet" parent="." unique_id=447819710 instance=ExtResource("4_fkybt")]
-max_health = 1e+38
+max_health = 150.0
 
 [node name="Pistol" parent="." unique_id=1590056783 instance=ExtResource("5_fkybt")]
 position = Vector2(-1, -40)
-damage = 0.0
 
 [node name="Centre" type="Marker2D" parent="." unique_id=223066934]
 position = Vector2(-1, -40)

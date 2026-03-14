@@ -22,8 +22,8 @@ TODO:
 	Guns:
 		✅Add pistol cooldown.
 		✅Add a Gun class.
-		Add shotgun pellet.
-		Add shotgun.
+		✅Add shotgun pellet.
+		⏳Add shotgun.
 		✅Add bullet grace period where it can't get destroyed.
 	Enemies:
 		Add new enemy.

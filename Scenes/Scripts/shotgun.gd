@@ -16,3 +16,15 @@ func shoot():
 	
 	get_tree().current_scene.add_child(bullet)
 	
+	for i in range(6):
+		var angles = [-15, -10, -5, 5, 10, 15]
+		
+		var bulleti = BULLET.instantiate()
+		
+		bulleti.position = shoot_point.global_position
+		bulleti.rotation = shoot_point.global_rotation + deg_to_rad(angles[i])
+		bulleti.damage = bullet_damage
+		bulleti.speed = bullet_speed
+		
+		get_tree().current_scene.add_child(bulleti)
+	

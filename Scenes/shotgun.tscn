@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://mcwijsbpt0kn"]
+
+[ext_resource type="Script" uid="uid://bv10euto54nlr" path="res://Scenes/Scripts/shotgun.gd" id="1_u0ide"]
+[ext_resource type="PackedScene" uid="uid://d36xewn8yw0f" path="res://Scenes/pellet.tscn" id="2_u0ide"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_0ym6k"]
+load_path = "res://.godot/imported/Shotgun.png-1a5081ad34c1108aba1212a842db163d.ctex"
+
+[node name="Shotgun" type="Node2D" unique_id=975713575 node_paths=PackedStringArray("ray_cast", "sprite", "shoot_point")]
+script = ExtResource("1_u0ide")
+BULLET = ExtResource("2_u0ide")
+ray_cast = NodePath("RayCast2D")
+sprite = NodePath("Pivot_point/Shotgun")
+shoot_point = NodePath("Pivot_point/Shotgun/Shoot_point")
+bullet_damage = 5.0
+bullet_speed = 4500.0
+cooldown = 0.5
+
+[node name="Pivot_point" type="Marker2D" parent="." unique_id=350919101]
+
+[node name="Shotgun" type="Sprite2D" parent="Pivot_point" unique_id=724757405]
+position = Vector2(196, 0)
+scale = Vector2(5, 5)
+texture = SubResource("CompressedTexture2D_0ym6k")
+
+[node name="Shoot_point" type="Marker2D" parent="Pivot_point/Shotgun" unique_id=958703588]
+position = Vector2(17.800001, -3.0000002)
+gizmo_extents = 0.0
+
+[node name="RayCast2D" type="RayCast2D" parent="." unique_id=323689910]
+target_position = Vector2(296, 0)
+collision_mask = 2

@@ -6,8 +6,10 @@ class_name Gun
 @export var BULLET : PackedScene
 @export var ray_cast : RayCast2D
 @export var sprite : Sprite2D
+@export var shoot_point : Marker2D
 
-@export var Damage : float
+@export var bullet_damage : float
+@export var bullet_speed : float
 @export var cooldown : float
 var cooldown_timer := 0.0
 var can_shoot := false

@@ -1,0 +1,39 @@
+[gd_scene format=3 uid="uid://d36xewn8yw0f"]
+
+[ext_resource type="Texture2D" uid="uid://cy51f6114n2o6" path="res://Assets/pellet.png" id="1_3383t"]
+[ext_resource type="Script" uid="uid://dtdaytfewhnna" path="res://Scenes/Scripts/bullet.gd" id="1_w8cbf"]
+[ext_resource type="PackedScene" uid="uid://qh88s3es0m2a" path="res://Scenes/Componets/hitbox_componet.tscn" id="2_w8cbf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_10ex8"]
+size = Vector2(11.555556, 13.333334)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jjffl"]
+size = Vector2(24, 28)
+
+[node name="Pellet" type="Area2D" unique_id=552613554]
+collision_layer = 8
+collision_mask = 2
+script = ExtResource("1_w8cbf")
+
+[node name="Pullet" type="Sprite2D" parent="." unique_id=1730929958]
+scale = Vector2(4.9999995, 4.9999995)
+texture = ExtResource("1_3383t")
+
+[node name="Hitboxcomponet" parent="." unique_id=1693162790 instance=ExtResource("2_w8cbf")]
+scale = Vector2(1.4999999, 1.4999999)
+collision_layer = 8
+collision_mask = 7
+damage = 10.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitboxcomponet" unique_id=1214323224]
+position = Vector2(4.768368e-07, -1.5894571e-07)
+rotation = 1.5707964
+scale = Vector2(1.4999999, 1.4999999)
+shape = SubResource("RectangleShape2D_10ex8")
+debug_color = Color(0.7, 0, 0, 0.41960785)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=482427954]
+rotation = 1.5707964
+shape = SubResource("RectangleShape2D_jjffl")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

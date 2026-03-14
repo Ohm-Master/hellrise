@@ -1,6 +1,6 @@
 extends Node2D
 
-class_name HurtBox
+class_name HitBoxComponet
 
 @export var damage : float
 var parent
